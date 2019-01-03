@@ -1,7 +1,7 @@
 export default {
   data() {
     return {
-      showLogin: true,
+      showLogin: false,
       loginForm: {
         username: '',
         password: ''
@@ -21,5 +21,8 @@ export default {
       console.log(type)
       this.$router.push('/manage')
     }
+  },
+  mounted() {
+    this.showLogin = true;
   }
 }

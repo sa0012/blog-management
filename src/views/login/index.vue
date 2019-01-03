@@ -34,7 +34,7 @@ export default Controller;
 
 <style lang="scss" scoped>
 .login {
-  background-color: #0758a5;
+  background-color: #324057;
 
   .manage_tip {
     position: absolute;
@@ -71,7 +71,7 @@ export default Controller;
   }
   .form-fade-enter,
   .form-fade-leave-active {
-    transform: translate3d(0, -50px, 0);
+    transform: translate3d(-50%, -50px, 0);
     opacity: 0;
   }
 }
