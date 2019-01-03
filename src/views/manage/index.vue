@@ -61,6 +61,7 @@
         </el-menu>
       </el-col>
       <el-col :span="20" style="height: 100%;overflow: auto;">
+        <top-tip></top-tip>
         <keep-alive>
           <router-view></router-view>
         </keep-alive>

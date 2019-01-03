@@ -1,3 +1,5 @@
+import TopTip from '@/components/topTip'
+
 export default {
   name: 'Manage',
   data() {
@@ -17,5 +19,8 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     }
+  },
+  components: {
+    TopTip
   }
 }
