@@ -1,6 +1,6 @@
 <template>
   <div class="user-list">
-    this is a addArticle
+    <div v-html="compiledMarkdown"></div>
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="toptip">
     <el-breadcrumb separator="/" class="bread-nav">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/manage' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item v-for="(item, index) in $route.meta" :key="index">{{ item }}</el-breadcrumb-item>
     </el-breadcrumb>
 
