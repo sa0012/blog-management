@@ -6,7 +6,14 @@
         <span>创作中心</span>
       </div>
       <div class="md-tool">
-        <i class="el-icon-refresh tool-icon" v-for="(item, index) in toolArr" :key="index" @mousemove="showBackground(index)"></i>
+        <div
+          class="tool-icon"
+          v-for="(item, index) in toolArr"
+          :key="index"
+          @mousemove="showBackground(index)"
+        >
+          <i class="el-icon-refresh"></i>
+        </div>
       </div>
     </div>
     <div class="edit" :style="{ height: `${contentHeight - 74}px` }">
@@ -77,6 +84,7 @@ export default Controller;
     .tool-icon {
       font-size: 18px;
       font-weight: bold;
+      display: inline-block;
     }
   }
 }
@@ -89,6 +97,8 @@ export default Controller;
   width: 100%;
   height: 100%;
   overflow: auto;
+  padding: 15px;
+  box-sizing: border-box;
 }
 
 .compile-md {

@@ -30,63 +30,73 @@ export default {
       toolArr: [
         {
           icon: '',
-          text: '撤销'
+          text: '重做',
+          isShow: false
         },
         {
           icon: '',
-          text: '重做'
+          text: '加粗',
+          isShow: false
         },
         {
           icon: '',
-          text: '加粗'
+          text: '斜体',
+          isShow: false
         },
         {
           icon: '',
-          text: '斜体'
+          text: '标题',
+          isShow: false
         },
         {
           icon: '',
-          text: '标题'
+          text: '删除线',
+          isShow: false
         },
         {
           icon: '',
-          text: '删除线'
+          text: '无序列表',
+          isShow: false
         },
         {
           icon: '',
-          text: '无序列表'
+          text: '有序列表',
+          isShow: false
         },
         {
           icon: '',
-          text: '有序列表'
+          text: '待办事项',
+          isShow: false
         },
         {
           icon: '',
-          text: '待办事项'
+          text: '引用',
+          isShow: false
         },
         {
           icon: '',
-          text: '引用'
+          text: '代码',
+          isShow: false
         },
         {
           icon: '',
-          text: '代码'
+          text: '超链接',
+          isShow: false
         },
         {
           icon: '',
-          text: '超链接'
+          text: '图片',
+          isShow: false
         },
         {
           icon: '',
-          text: '图片'
+          text: '导入',
+          isShow: false
         },
         {
           icon: '',
-          text: '导入'
-        },
-        {
-          icon: '',
-          text: '导出'
+          text: '导出',
+          isShow: false
         },
       ]
     }
@@ -104,7 +114,7 @@ export default {
   },
   methods: {
     showBackground(index) {
-      
+
     }
   }
 }
