@@ -4,13 +4,12 @@ export default {
   name: 'Manage',
   data() {
     return {
-
     }
   },
   computed: {
-    defaultActive: function() {
+    defaultActive() {
       return this.$route.path.replace("/", "");
-    }
+    },
   },
   methods: {
     handleOpen(key, keyPath) {
@@ -19,6 +18,8 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     }
+  },
+  mounted() {
   },
   components: {
     TopTip
