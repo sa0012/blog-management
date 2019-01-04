@@ -1,9 +1,13 @@
 <template>
   <div class="user-list" :style="{ height: `${contentHeight}px` }">
     <div class="edit-tool"></div>
-    <div class="edit">
-      <textarea class="entry-mes" v-model="articleContent"></textarea>
-      <div v-html="compiledMarkdown" class="show-template"></div>
+    <div class="edit" :style="{ height: `${contentHeight - 74}px` }">
+      <div class="entry-mes">
+        <textarea v-model="articleContent" class="art-edit"></textarea>
+      </div>
+      <div class="show-template">
+        <div v-html="compiledMarkdown" class="compile-md"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -21,7 +25,6 @@ export default Controller;
 }
 
 .edit {
-  height: 100%;
   display: flex;
 }
 
@@ -29,6 +32,7 @@ export default Controller;
 .show-template {
   flex: 1;
   height: 100%;
+  padding: 20px;overflow: hidden;
 }
 
 .show-template {
@@ -36,19 +40,30 @@ export default Controller;
 }
 
 .entry-mes {
-  resize: none;
-  padding: 20px;
   background: #f5f5f5;
   box-sizing: border-box;
-  border: none;
-  outline: none;
-  -webkit-appearance: none;
 }
 
 .edit-tool {
   height: 44px;
-  width: 100%;
   line-height: 44px;
   background: #e0e0e0;
+}
+
+.art-edit {
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  resize: none;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.compile-md {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  // background: green;
 }
 </style>
