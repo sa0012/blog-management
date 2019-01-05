@@ -1,25 +1,13 @@
-let marked = require('marked');
-let hljs = require('highlight.js');
-import 'highlight.js/styles/default.css';
+// let marked = require('marked');
+// let hljs = require('highlight.js');
+// import 'highlight.js/styles/default.css';
+
+import {
+  mavonEditor
+} from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 
 
-marked.setOptions({
-  renderer: new marked.Renderer(),
-  gfm: true,
-  tables: true,
-  breaks: false,
-  pedantic: false,
-  sanitize: false,
-  smartLists: true,
-  smartypants: false,
-  highlight: function (code, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      return hljs.highlight(lang, code, true).value;
-    } else {
-      return hljs.highlightAuto(code).value;
-    }
-  }
-});
 
 
 export default {
@@ -27,8 +15,7 @@ export default {
   data() {
     return {
       articleContent: '',
-      toolArr: [
-        {
+      toolArr: [{
           icon: '',
           text: '重做',
           isShow: false
@@ -102,19 +89,16 @@ export default {
     }
   },
   computed: {
-    compiledMarkdown() {
-      // let detail = '```js\n console.log("hello"); \n```';
-      return marked(this.articleContent || '', {
-        sanitize: true
-      });
-    },
     contentHeight() {
       return (document.body.clientHeight || document.documentElement.clientHeight || 0) - 60;
     }
   },
   methods: {
     showBackground(index) {
-
+      console.log(index)
     }
+  },
+  components: {
+    mavonEditor
   }
 }
