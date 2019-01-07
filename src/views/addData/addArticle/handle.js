@@ -1,7 +1,3 @@
-// let marked = require('marked');
-// let hljs = require('highlight.js');
-// import 'highlight.js/styles/default.css';
-
 import {
   mavonEditor
 } from 'mavon-editor'
@@ -94,8 +90,8 @@ export default {
     }
   },
   methods: {
-    showBackground(index) {
-      console.log(index)
+    changeEdit(value, render) {
+      console.log(value)
     }
   },
   components: {

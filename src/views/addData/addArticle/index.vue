@@ -1,7 +1,11 @@
 <template>
   <div class="user-list" :style="{ height: `${contentHeight}px` }">
     <div class="show-template" :style="{ height: `${contentHeight - 30}px` }">
-      <mavon-editor class="compile-md" style="height: 100%;"></mavon-editor>
+      <mavon-editor 
+        class="compile-md" 
+        style="height: 100%;" 
+        :ishljs = "true"
+        @change="changeEdit"></mavon-editor>
     </div>
   </div>
 </template>
