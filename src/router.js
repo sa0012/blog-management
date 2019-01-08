@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -16,7 +16,7 @@ export default new Router({
       path: '/manage',
       name: 'Manage',
       meta:{
-        requiresAuth:true
+        requiresAuth: true
       },
       component: () => import('@/views/manage'),
       children: [
@@ -24,7 +24,10 @@ export default new Router({
         {
           path: '/',
           name: 'Home',
-          component: () => import('@/views/home')
+          component: () => import('@/views/home'),
+          meta:{
+            requiresAuth: true
+          },
         },
         {
           path: '/userList',
@@ -66,7 +69,10 @@ export default new Router({
         {
           path: '/addArticle',
           name: 'addArticle',
-          meta: ['添加数据', '添加文章'],
+          // meta: ['添加数据', '添加文章'],
+          meta:{
+            requiresAuth: true
+          },
           // 添加文章
           component: () => import('@/views/addData/addArticle')
         },
@@ -117,3 +123,26 @@ export default new Router({
     }
   ]
 })
+
+// 注册全局钩子用来拦截导航
+router.beforeEach((to, from, next) => {
+  //获取store里面的token
+  let token = window.sessionStorage.getItem('code_token')
+  //判断要去的路由有没有requiresAuth
+  console.log(to.meta, 'requiresAuth')
+  if(to.meta.requiresAuth){
+      if(token){
+        console.log(token, 'token')
+        next();
+      }else{
+        next({
+          path: '/',
+          query: { redirect: to.fullPath }  // 将刚刚要去的路由path（却无权限）作为参数，方便登录成功后直接跳转到该路由
+        });
+      } 
+  }else{
+    next();
+  }
+});
+
+export default router;

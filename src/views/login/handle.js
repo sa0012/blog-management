@@ -26,6 +26,8 @@ export default {
       console.log(type)
       $.post('/user/login', this.loginForm).then(res => {
         console.log(res, 'login')
+        alert('登陆成功！')
+        window.sessionStorage.setItem('code_token', res.token)
         this.$router.push('/manage')
       })
     },
@@ -33,7 +35,6 @@ export default {
       $.get('/other/checkcode').then(res => {
         this.img_base64 = res.img
         this.loginForm.code_token = res.token
-        window.sessionStorage.setItem('code_token', res.token)
         console.log(res, 'checkcode')
       })
     }
