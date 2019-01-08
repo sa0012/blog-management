@@ -2,17 +2,31 @@
   <div class="login fillcontain">
     <transition name="form-fade" mode="in-out">
       <section class="form_contianer" v-show="showLogin">
-        <div class="manage_tip">
+        <!-- <div class="manage_tip">
           <p>BLOG后台管理系统</p>
-        </div>
+        </div>-->
         <el-form :model="loginForm" :rules="rules" ref="loginForm">
-          <el-form-item prop="username">
-            <el-input v-model="loginForm.username" placeholder="用户名">
+          <el-form-item prop="user_id">
+            <el-input v-model="loginForm.user_id" placeholder="用户名">
               <span>dsfsf</span>
             </el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input type="password" placeholder="密码" v-model="loginForm.password"></el-input>
+            <el-input type="user_pwd" placeholder="密码" v-model="loginForm.user_pwd"></el-input>
+          </el-form-item>
+          <el-form-item prop="code">
+            <el-col :span="14">
+              <el-input type="text" placeholder="验证码" v-model="loginForm.code"></el-input>
+            </el-col>
+            <el-col :span="10">
+              <img
+                class="form-checkcode"
+                :src="img_base64"
+                alt="验证码"
+                title="点击切换验证码"
+                @click="get_check_code"
+              >
+            </el-col>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm('loginForm')" class="submit_btn">登陆</el-button>
@@ -74,6 +88,10 @@ export default Controller;
     transform: translate3d(-50%, -50px, 0);
     opacity: 0;
   }
+}
+
+.form-checkcode {
+  float: right;
 }
 </style>
 

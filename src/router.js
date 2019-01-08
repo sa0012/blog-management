@@ -15,6 +15,9 @@ export default new Router({
     {
       path: '/manage',
       name: 'Manage',
+      meta:{
+        requiresAuth:true
+      },
       component: () => import('@/views/manage'),
       children: [
         // 首页
