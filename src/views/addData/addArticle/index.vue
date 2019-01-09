@@ -13,7 +13,7 @@
         @change="editorChange"></mavon-editor>
     </div>
 
-    <category-modal :showCategory.sync="showCategory"></category-modal>
+    <category-modal :showCategory.sync="showCategory" :article="article"></category-modal>
   </div>
 </template>
 

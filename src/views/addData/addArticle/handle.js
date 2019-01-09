@@ -1,4 +1,3 @@
-import $ from '@/utils'
 import {
   mavonEditor
 } from 'mavon-editor'
@@ -11,11 +10,7 @@ export default {
   name: 'addArticle',
   data() {
     return {
-      config: {
-        article: '',
-        category: 'markdown',
-        tags: ['js', 'vue', 'markdown'],
-      },
+      article: '',
       showCategory: false
     }
   },
@@ -26,14 +21,11 @@ export default {
   },
   methods: {
     editorChange(value, render) {
-      this.config.article = value;
+      this.article = value;
     },
     submit() {
       console.log(this.config, 'config')
       this.showCategory = true;
-      // $.post('/article/addArticle', this.config).then(res => {
-      //   console.log(res, 'article')
-      // })
     }
   },
   components: {

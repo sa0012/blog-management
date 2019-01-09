@@ -8,7 +8,7 @@
           <el-col :span="20">
             <el-tag
               :key="tag"
-              v-for="tag in dynamicTags"
+              v-for="tag in config.tags"
               closable
               :disable-transitions="false"
               :color="tagColor"
@@ -26,7 +26,7 @@
             <el-button v-else class="button-new-tag" size="small" @click="showInput">+ 创建标签</el-button>
           </el-col>
         </el-row>
-        <el-col :span="20" :offset="4" style="padding: 10px 0;">最多只能添加5个标签</el-col>
+        <el-col :span="20" :offset="4" style="padding: 20px 0;">最多只能添加5个标签</el-col>
         <el-row style="padding-top: 15px;">
           <el-col :span="4">文章分类</el-col>
           <el-col :span="20">
@@ -40,25 +40,31 @@
             </el-select>
           </el-col>
         </el-row>
-        <el-row>
-          <el-col :span="24"></el-col>
-        </el-row>
+        <el-col :span="24" style="margin-top: 60px; text-align: right;">
+          <el-button @click="close">取消</el-button>
+          <el-button @click="publish">发布文章</el-button>
+        </el-col>
+        <i class="el-icon-close close-icon" @click="close"></i>
       </section>
     </transition>
   </div>
 </template>
 
 <script>
+import $ from "@/utils";
 export default {
   props: {
     showCategory: {
       type: Boolean,
       default: false
+    },
+    article: {
+      type: String,
+      default: ''
     }
   },
   data() {
     return {
-      dynamicTags: ["标签一", "标签二", "标签三"],
       options: [
         {
           value: "选项1",
@@ -75,26 +81,50 @@ export default {
       ],
       value: "",
       inputVisible: false,
+      isShowCreateTags: false,
       inputValue: "",
-      tagColor: "#fff"
+      tagColor: "#fff",
+      config: {
+        article: this.article,
+        category: '',
+        tags: [],
+      },
     };
   },
   methods: {
+    publish() {
+      if (!this.config.tags) {
+        this.$message("请添加文章标签");
+        return;
+      } else if (this.config.tags.length > 5) {
+        this.$message("文章标签不能超过5个");
+        return;
+      }
+      $.post("/article/addArticle", this.config).then(res => {
+        console.log(res, "article");
+      });
+    },
     handleClose(tag) {
-      this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+      this.config.tags.splice(this.config.tags.indexOf(tag), 1);
     },
 
     showInput() {
-      this.inputVisible = true;
-      this.$nextTick(_ => {
-        this.$refs.saveTagInput.$refs.input.focus();
-      });
+      if (this.config.tags.length < 5) {
+        this.inputVisible = true;
+        this.$nextTick(() => {
+          this.$refs.saveTagInput.$refs.input.focus();
+        });
+      } else {
+        this.inputVisible = false;
+      }
     },
 
     handleInputConfirm() {
+      // if (this.config.tags.length > 5) return false;
+      console.log("这是添加操作");
       let inputValue = this.inputValue;
       if (inputValue) {
-        this.dynamicTags.push(inputValue);
+        this.config.tags.push(inputValue);
       }
       this.inputVisible = false;
       this.inputValue = "";
@@ -103,7 +133,11 @@ export default {
       this.$emit("update:showCategory", false);
     }
   },
-  mounted() {}
+  mounted() {
+    if (this.config.tags.length > 5) {
+      this.inputVisible = false;
+    }
+  }
 };
 </script>
 
@@ -121,7 +155,7 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     background: #fff;
-    min-height: 400px;
+    min-height: 300px;
     min-width: 520px;
     padding: 30px;
     border-radius: 5px;
@@ -130,6 +164,21 @@ export default {
       font-size: 18px;
       text-align: center;
       padding-bottom: 30px;
+    }
+
+    .close-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 30px;
+      color: #999;
+      display: block;
+      transition: all 0.5s ease;
+
+      &:hover {
+        transform: rotateZ(-180deg);
+        color: red;
+      }
     }
   }
 }
