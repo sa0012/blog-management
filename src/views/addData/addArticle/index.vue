@@ -12,6 +12,8 @@
         style="height: 100%;"
         @change="editorChange"></mavon-editor>
     </div>
+
+    <category-modal :showCategory.sync="showCategory"></category-modal>
   </div>
 </template>
 

@@ -3,7 +3,7 @@ import {
   mavonEditor
 } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
-
+import CategoryModal from './categoryModal'
 
 
 
@@ -15,8 +15,8 @@ export default {
         article: '',
         category: 'markdown',
         tags: ['js', 'vue', 'markdown'],
-        // code_token: window.sessionStorage.getItem('code_token')
-      }
+      },
+      showCategory: false
     }
   },
   computed: {
@@ -30,12 +30,14 @@ export default {
     },
     submit() {
       console.log(this.config, 'config')
-      $.post('/article/addArticle', this.config).then(res => {
-        console.log(res, 'article')
-      })
+      this.showCategory = true;
+      // $.post('/article/addArticle', this.config).then(res => {
+      //   console.log(res, 'article')
+      // })
     }
   },
   components: {
-    mavonEditor
+    mavonEditor,
+    CategoryModal
   }
 }
