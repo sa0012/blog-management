@@ -2,39 +2,77 @@
   <div class="login fillcontain">
     <transition name="form-fade" mode="in-out">
       <section class="form_contianer" v-show="showLogin">
-        <!-- <div class="manage_tip">
+        <div class="manage_tip">
           <p>BLOG后台管理系统</p>
-        </div>-->
-        <el-form :model="loginForm" :rules="rules" ref="loginForm">
-          <el-form-item prop="user_id">
-            <el-input v-model="loginForm.user_id" placeholder="用户名">
-              <span>dsfsf</span>
-            </el-input>
-          </el-form-item>
-          <el-form-item prop="password">
-            <el-input type="user_pwd" placeholder="密码" v-model="loginForm.user_pwd"></el-input>
-          </el-form-item>
-          <el-form-item prop="code">
-            <el-col :span="14">
-              <el-input type="text" placeholder="验证码" v-model="loginForm.code"></el-input>
-            </el-col>
-            <el-col :span="10">
-              <img
-                class="form-checkcode"
-                :src="img_base64"
-                alt="验证码"
-                title="点击切换验证码"
-                @click="get_check_code"
-              >
-            </el-col>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="submitForm('loginForm')" class="submit_btn">登陆</el-button>
-          </el-form-item>
-        </el-form>
-        <p class="tip">温馨提示：</p>
-        <p class="tip">未登录过的新用户，自动注册</p>
-        <p class="tip">注册过的用户可凭账号密码登录</p>
+        </div>
+        <sq-tabs active="name1" line-scale="0.7" font-size="16" title-height="40">
+          <sq-tabpane label="登陆" name="name1">
+            <el-form :model="loginForm" :rules="rules" ref="loginForm">
+              <el-form-item prop="user_id">
+                <el-input v-model="loginForm.user_id" placeholder="账号"></el-input>
+              </el-form-item>
+              <el-form-item prop="password">
+                <el-input type="password" placeholder="密码" v-model="loginForm.user_pwd"></el-input>
+              </el-form-item>
+              <el-form-item prop="code">
+                <el-col :span="14">
+                  <el-input type="text" placeholder="验证码" v-model="loginForm.code"></el-input>
+                </el-col>
+                <el-col :span="10">
+                  <img
+                    class="form-checkcode"
+                    :src="img_base64"
+                    alt="验证码"
+                    title="点击切换验证码"
+                    @click="get_check_code"
+                  >
+                </el-col>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="primary" @click="submitForm('loginForm')" class="submit_btn">登陆</el-button>
+              </el-form-item>
+            </el-form>
+          </sq-tabpane>
+          <sq-tabpane label="注册" name="name2">
+            <el-form :model="registerForm" :rules="registerRules" ref="loginForm">
+              <el-form-item prop="user_name">
+                <el-input v-model="registerForm.user_name" placeholder="昵称"></el-input>
+              </el-form-item>
+              <el-form-item prop="user_id">
+                <el-input v-model="registerForm.user_id" placeholder="账号"></el-input>
+              </el-form-item>
+              <el-form-item prop="iphone">
+                <el-input v-model="registerForm.iphone" placeholder="手机号码" maxlength="11"></el-input>
+              </el-form-item>
+              <el-form-item prop="email">
+                <el-input v-model="registerForm.email" placeholder="邮箱"></el-input>
+              </el-form-item>
+              <el-form-item prop="user_pwd">
+                <el-input type="password" placeholder="密码" v-model="registerForm.user_pwd"></el-input>
+              </el-form-item>
+              <el-form-item prop="re_user_pwd">
+                <el-input type="password" placeholder="确认密码" v-model="registerForm.re_user_pwd"></el-input>
+              </el-form-item>
+              <el-form-item prop="code">
+                <el-col :span="14">
+                  <el-input type="text" placeholder="验证码" v-model="registerForm.code"></el-input>
+                </el-col>
+                <el-col :span="10">
+                  <img
+                    class="form-checkcode"
+                    :src="img_base64"
+                    alt="验证码"
+                    title="点击切换验证码"
+                    @click="get_check_code"
+                  >
+                </el-col>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="primary" @click="register()" class="submit_btn">注册</el-button>
+              </el-form-item>
+            </el-form>
+          </sq-tabpane>
+        </sq-tabs>
       </section>
     </transition>
   </div>
