@@ -83,7 +83,7 @@ let utils = {
     } : params
     url = '/api' + url;
     window.axios[method](url, req).then(res => {
-      resolve && res && typeof res.data !== 'undefined' && resolve(res.data.data)
+      resolve && res && typeof res.data !== 'undefined' && resolve(res.data)
     }, error => {
       reject && reject(error)
     })

@@ -175,11 +175,11 @@ export default {
     justify-content: center;
   }
   &-active-line {
-    color: #00DACA;
+    color: #409EFF;
   }
   &-active-block {
     color: #fff;
-    background-color: #00DACA;
+    background-color: #409EFF;
   }
   &-wrapper {
     position: relative;
@@ -203,7 +203,7 @@ export default {
     bottom: 0;
     height: 2px;
     position: absolute;
-    background-color: #00DACA;
+    background-color: #409EFF;
     transition-duration: 0.2s;
   }
   &-header-item {

@@ -7,7 +7,7 @@
         </div>
         <sq-tabs active="name1" line-scale="0.7" font-size="16" title-height="40">
           <sq-tabpane label="登陆" name="name1">
-            <el-form :model="loginForm" :rules="rules" ref="loginForm">
+            <el-form :model="loginForm" :rules="rules" ref="loginForm" style="padding-top: 40px;">
               <el-form-item prop="user_id">
                 <el-input v-model="loginForm.user_id" placeholder="账号"></el-input>
               </el-form-item>
@@ -34,7 +34,7 @@
             </el-form>
           </sq-tabpane>
           <sq-tabpane label="注册" name="name2">
-            <el-form :model="registerForm" :rules="registerRules" ref="loginForm">
+            <el-form :model="registerForm" :rules="registerRules" ref="loginForm" style="padding-top: 40px;">
               <el-form-item prop="user_name">
                 <el-input v-model="registerForm.user_name" placeholder="昵称"></el-input>
               </el-form-item>

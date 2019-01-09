@@ -15,7 +15,7 @@ let token = window.sessionStorage.getItem('code_token')
 // request拦截器，每次发送请求的时候拦截下来
 instance.interceptors.request.use(
   config => {
-    // 每次发送请求，检查 vuex 中是否有token,如果有放在headers中
+    // 每次发送请求，检查 sessionStorage 中是否有token,如果有放在headers中
     if(token){
       config.headers.Authorization = token;
     }
