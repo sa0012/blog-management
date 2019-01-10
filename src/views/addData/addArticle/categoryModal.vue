@@ -1,52 +1,50 @@
 <template>
   <div class="fillcontain category" ref="category" v-show="showCategory">
-    <transition name="form-fade" mode="in-out">
-      <section class="category-wrap">
-        <h3 class="category-title">文章发布</h3>
-        <el-row>
-          <el-col :span="4">文章标签：</el-col>
-          <el-col :span="20">
-            <el-tag
-              :key="tag"
-              v-for="tag in config.tags"
-              closable
-              :disable-transitions="false"
-              :color="tagColor"
-              @close.stop="handleClose(tag)"
-            >{{tag}}</el-tag>
-            <el-input
-              class="input-new-tag"
-              v-if="inputVisible"
-              v-model="inputValue"
-              ref="saveTagInput"
-              size="small"
-              @keyup.enter.native="handleInputConfirm"
-              @blur="handleInputConfirm"
-            ></el-input>
-            <el-button v-else class="button-new-tag" size="small" @click="showInput">+ 创建标签</el-button>
-          </el-col>
-        </el-row>
-        <el-col :span="20" :offset="4" style="padding: 20px 0;">最多只能添加5个标签</el-col>
-        <el-row style="padding-top: 15px;">
-          <el-col :span="4">文章分类</el-col>
-          <el-col :span="20">
-            <el-select v-model="value" placeholder="请选择文章分类">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
-          </el-col>
-        </el-row>
-        <el-col :span="24" style="margin-top: 60px; text-align: right;">
-          <el-button @click="close">取消</el-button>
-          <el-button @click="publish">发布文章</el-button>
+    <section class="category-wrap">
+      <h3 class="category-title">文章发布</h3>
+      <el-row>
+        <el-col :span="4">文章标签：</el-col>
+        <el-col :span="20">
+          <el-tag
+            :key="tag"
+            v-for="tag in config.tags"
+            closable
+            :disable-transitions="false"
+            :color="tagColor"
+            @close.stop="handleClose(tag)"
+          >{{tag}}</el-tag>
+          <el-input
+            class="input-new-tag"
+            v-if="inputVisible"
+            v-model="inputValue"
+            ref="saveTagInput"
+            size="small"
+            @keyup.enter.native="handleInputConfirm"
+            @blur="handleInputConfirm"
+          ></el-input>
+          <el-button v-else class="button-new-tag" size="small" @click="showInput">+ 创建标签</el-button>
         </el-col>
-        <i class="el-icon-close close-icon" @click="close"></i>
-      </section>
-    </transition>
+      </el-row>
+      <el-col :span="20" :offset="4" style="padding: 20px 0;">最多只能添加5个标签</el-col>
+      <el-row style="padding-top: 15px;">
+        <el-col :span="4">文章分类</el-col>
+        <el-col :span="20">
+          <el-select v-model="value" placeholder="请选择文章分类">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+        </el-col>
+      </el-row>
+      <el-col :span="24" style="margin-top: 60px; text-align: right;">
+        <el-button @click="close">取消</el-button>
+        <el-button @click="publish">发布文章</el-button>
+      </el-col>
+      <i class="el-icon-close close-icon" @click="close"></i>
+    </section>
   </div>
 </template>
 
@@ -60,22 +58,22 @@ export default {
     },
     article: {
       type: String,
-      default: ''
+      default: ""
     }
   },
   data() {
     return {
       options: [
         {
-          value: "选项1",
+          value: "1",
           label: "前端"
         },
         {
-          value: "选项2",
+          value: "2",
           label: "后端"
         },
         {
-          value: "选项3",
+          value: "3",
           label: "其他"
         }
       ],
@@ -85,22 +83,35 @@ export default {
       inputValue: "",
       tagColor: "#fff",
       config: {
-        article: this.article,
-        category: '',
-        tags: [],
-      },
+        article: '',
+        category: "",
+        tags: []
+      }
     };
   },
   methods: {
     publish() {
-      if (!this.config.tags) {
-        this.$message("请添加文章标签");
+      this.config.article = this.article;
+      let category = this.options.filter((item, index) => item.value === this.value);
+      console.log(category, 'category')
+      this.config.category = this.options[this.value];
+      this.config.category = category[0].label;
+      console.log(this.config, 'config')
+      if (!this.config.article) {
+        this.$message.warning('你还没有填写文章内容');
+        return;
+      } else if (this.config.tags.length <= 0) {
+        this.$message.warning("请添加文章标签");
         return;
       } else if (this.config.tags.length > 5) {
-        this.$message("文章标签不能超过5个");
+        this.$message.warning("文章标签不能超过5个");
         return;
-      }
+      } else if (!this.config.category) {
+        this.$message.warning('请选择一个文章分类');
+        return;
+      } 
       $.post("/article/addArticle", this.config).then(res => {
+        this.$emit("update:showCategory", false);
         console.log(res, "article");
       });
     },
@@ -115,13 +126,12 @@ export default {
           this.$refs.saveTagInput.$refs.input.focus();
         });
       } else {
+        this.$message.warning("文章标签不能超过5个");
         this.inputVisible = false;
       }
     },
 
     handleInputConfirm() {
-      // if (this.config.tags.length > 5) return false;
-      console.log("这是添加操作");
       let inputValue = this.inputValue;
       if (inputValue) {
         this.config.tags.push(inputValue);
@@ -159,6 +169,8 @@ export default {
     min-width: 520px;
     padding: 30px;
     border-radius: 5px;
+    z-index: 1601;
+    animation: slide 0.5s ease-out;
 
     .category-title {
       font-size: 18px;
@@ -182,15 +194,6 @@ export default {
     }
   }
 }
-.form-fade-enter-active,
-.form-fade-leave-active {
-  transition: all 1s;
-}
-.form-fade-enter,
-.form-fade-leave-active {
-  transform: translate3d(-50%, -50px, 0);
-  opacity: 0;
-}
 
 .el-tag + .el-tag {
   margin-left: 10px;
@@ -206,6 +209,17 @@ export default {
   width: 90px;
   margin-left: 10px;
   vertical-align: bottom;
+}
+
+@keyframes slide {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
 }
 </style>
 

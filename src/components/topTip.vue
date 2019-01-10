@@ -2,14 +2,14 @@
   <div class="toptip">
     <el-breadcrumb separator="/" class="bread-nav">
       <el-breadcrumb-item :to="{ path: '/manage' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item v-for="(item, index) in $route.meta" :key="index">{{ item }}</el-breadcrumb-item>
+      <el-breadcrumb-item v-for="(item, index) in $route.meta.title" :key="index">{{ item }}</el-breadcrumb-item>
     </el-breadcrumb>
 
     <el-dropdown @command="handleCommand" menu-align="start">
       <img src="../assets/images/default.jpg" class="user-avator">
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item command="home">首页</el-dropdown-item>
-        <el-dropdown-item command="singout">退出</el-dropdown-item>
+        <el-dropdown-item command="singout" @click.native="quitLogin">退出</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </div>
@@ -27,6 +27,10 @@ export default {
       } else {
         console.log(command)
       }
+    },
+    quitLogin() {
+      console.log(111111)
+      this.$router.push(`/`)
     }
   },
   mounted() {}
