@@ -1,6 +1,6 @@
 <template>
-  <div class="user-list padding">
-    <el-table :data="tableData" style="width: 100%">
+  <div class="padding">
+    <el-table :data="tableData" class="user-list">
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
@@ -51,6 +51,11 @@ export default Controller;
 </script>
 
 <style lang="scss" scoped>
+.user-list {
+  width: 100%;
+  border: 1px solid #dfe6ec;
+  box-shadow: inset 0 2px 0 #f4f4f4;
+}
 .demo-table-expand {
   font-size: 0;
 }
