@@ -34,7 +34,13 @@ export default {
         iphone: '13333333333',
         email: '153654@qq.com',
         address: '上海市普陀区金沙江路 1518 弄'
-      }]
+      }],
+      search: ''
     }
   },
+  methods: {
+    handleClick(index) {
+      console.log(index)
+    }
+  }
 }

@@ -5,22 +5,22 @@
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
             <el-form-item label="用户 ID">
-              <span>{{ props.row._id }}</span>
+              <span class="table-text">{{ props.row._id }}</span>
             </el-form-item>
             <el-form-item label="用户名">
-              <span>{{ props.row.user_id }}</span>
+              <span class="table-text">{{ props.row.user_id }}</span>
             </el-form-item>
             <el-form-item label="用户手机号码">
-              <span>{{ props.row.iphone }}</span>
+              <span class="table-text">{{ props.row.iphone }}</span>
             </el-form-item>
             <el-form-item label="用户邮箱">
-              <span>{{ props.row.email }}</span>
+              <span class="table-text">{{ props.row.email }}</span>
             </el-form-item>
             <el-form-item label="用户注册时间">
-              <span>{{ props.row.date }}</span>
+              <span class="table-text">{{ props.row.date }}</span>
             </el-form-item>
             <el-form-item label="店铺地址">
-              <span>{{ props.row.address }}</span>
+              <span class="table-text">{{ props.row.address }}</span>
             </el-form-item>
             <!-- <el-form-item label="商品描述">
               <span>{{ props.row.desc }}</span>
@@ -29,10 +29,17 @@
         </template>
       </el-table-column>
       <el-table-column label="用户 ID" prop="_id"></el-table-column>
-      <el-table-column label="用户头像" prop="avator"></el-table-column>
-      <el-table-column label="用户名" prop="user_id">
-        <img src="../../../assets/images/default.jpg" alt="">
+      <el-table-column label="用户头像">
+        <template slot-scope="scope">
+          <img
+            class="user-avator"
+            src="../../../assets/images/default.jpg"
+            @click="handleClick(scope.row)"
+            alt
+          >
+        </template>
       </el-table-column>
+      <el-table-column label="用户名" prop="user_id"></el-table-column>
       <el-table-column label="用户地址" prop="address"></el-table-column>
     </el-table>
   </div>
@@ -55,5 +62,14 @@ export default Controller;
   margin-right: 0;
   margin-bottom: 0;
   width: 50%;
+}
+
+.table-text {
+  color: #333;
+}
+
+.user-avator {
+  width: 45px;
+  border-radius: 1000px;
 }
 </style>
