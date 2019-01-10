@@ -1,4 +1,5 @@
 import $ from '@/utils';
+import { setSession } from '@/common/mutils';
 import SqTabs from "@/components/tabs/src";
 import SqTabpane from "@/components/tabpane/src";
 
@@ -72,8 +73,10 @@ export default {
       }
       $.post('/user/login', this.loginForm).then(res => {
         if (res.code == 200) {
-          window.sessionStorage.setItem('code_token', res.data.token)
-          this.$router.push(`/manage?userId=${res.data._id}&user_name=${res.data.user_id}`)
+          setSession('code_token', res.data.token)
+          setSession('userId', res.data._id)
+          setSession('user_name', res.data.user_id)
+          this.$router.push(`/manage`)
         } else {
           this.get_check_code()
         }
@@ -97,8 +100,10 @@ export default {
       $.post('/user', this.registerForm).then(res => {
         if (res.code == 200) {
           alert('注册成功')
-          this.$router.push(`/manage?userId=${res.data._id}&user_name=${res.data.user_id}`)
-          window.sessionStorage.setItem('code_token', res.data.token)
+          this.$router.push(`/manage`)
+          setSession('code_token', res.data.token)
+          setSession('userId', res.data._id)
+          setSession('user_name', res.data.user_name)
         } else {
           this.get_check_code();
         }

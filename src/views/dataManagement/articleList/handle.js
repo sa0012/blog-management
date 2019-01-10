@@ -1,4 +1,5 @@
 import $ from '@/utils';
+import { getSession } from '@/common/mutils';
 
 export default {
   name: 'userList',
@@ -7,7 +8,7 @@ export default {
       config: {
         size: 10,
         page: 1,
-        user_id: '5c3306ab734e842ae4a1ebb0'
+        user_id: getSession('userId')
       }
     }
   },

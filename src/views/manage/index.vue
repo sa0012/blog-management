@@ -4,7 +4,7 @@
       <el-col :span="4" style="min-height: 100%; background-color: #324057;">
         <div class="user-msg">
           <img src="../../assets/images/default.jpg" alt="avator" class="user-avator">
-          <div class="user-name">{{ $route.query.user_name }}</div>
+          <div class="user-name">{{ userName }}</div>
         </div>
 
         <el-menu
@@ -65,10 +65,10 @@
           </el-submenu>
         </el-menu>
       </el-col>
-      <el-col :span="20" style="height: 100%;overflow: auto;">
+      <el-col :span="20" style="height: 100%; overflow: hidden;">
         <top-tip></top-tip>
         <keep-alive>
-          <router-view></router-view>
+          <router-view  :style="{ height: `${contentHeight}px` }"></router-view>
         </keep-alive>
       </el-col>
     </el-row>

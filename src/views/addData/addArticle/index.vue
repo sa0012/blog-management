@@ -1,5 +1,5 @@
 <template>
-  <div class="user-list" :style="{ height: `${contentHeight}px` }">
+  <div class="user-list">
     <el-row style="margin-bottom: 20px; display: flex; align-items: center;">
       <el-col :span="12" style="font-size: 24px; font-weight: bold; letter-spacing: 1px;">BLOG文章发布</el-col>
       <el-col :span="12">
