@@ -2,6 +2,11 @@
   <div class="manage fillcontain">
     <el-row style="height: 100%;">
       <el-col :span="4" style="min-height: 100%; background-color: #324057;">
+        <div class="user-msg">
+          <img src="../../assets/images/default.jpg" alt="avator" class="user-avator">
+          <div class="user-name">{{ $route.query.user_name }}</div>
+        </div>
+
         <el-menu
           :default-active="defaultActive"
           style="min-height: 100%;"
@@ -75,3 +80,22 @@ import Controller from "./handle";
 
 export default Controller;
 </script>
+
+
+<style lang="scss" scoped>
+.user-msg {
+  text-align: center;
+  padding-top: 20px;
+
+  .user-avator {
+    width: 80px;
+    border-radius: 1000px;
+  }
+
+  .user-name {
+    font-size: 16px;
+    color: #fff;
+    padding: 10px 0;
+  }
+}
+</style>

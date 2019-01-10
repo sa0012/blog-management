@@ -73,7 +73,7 @@ export default {
       $.post('/user/login', this.loginForm).then(res => {
         if (res.code == 200) {
           window.sessionStorage.setItem('code_token', res.data.token)
-          this.$router.push('/manage')
+          this.$router.push(`/manage?userId=${res.data._id}&user_name=${res.data.user_id}`)
         } else {
           this.get_check_code()
         }
@@ -97,7 +97,7 @@ export default {
       $.post('/user', this.registerForm).then(res => {
         if (res.code == 200) {
           alert('注册成功')
-          this.$router.push('/manage')
+          this.$router.push(`/manage?userId=${res.data._id}&user_name=${res.data.user_id}`)
           window.sessionStorage.setItem('code_token', res.data.token)
         } else {
           this.get_check_code();
