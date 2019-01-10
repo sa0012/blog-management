@@ -111,6 +111,7 @@ export default {
         return;
       } 
       $.post("/article/addArticle", this.config).then(res => {
+        this.$message.success('文章发布成功')
         this.$emit("update:showCategory", false);
         console.log(res, "article");
       });

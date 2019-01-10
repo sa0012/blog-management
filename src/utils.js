@@ -1,4 +1,5 @@
 const ua = navigator.userAgent
+import Vue from 'vue'
 let utils = {
   version: 0.01,
   isIOS: !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
@@ -83,6 +84,9 @@ let utils = {
     } : params
     url = '/api' + url;
     window.axios[method](url, req).then(res => {
+      if (res.data.code != 200) {
+        new Vue().$message.error(res.data.msg)
+      }
       resolve && res && typeof res.data !== 'undefined' && resolve(res.data)
     }, error => {
       reject && reject(error)

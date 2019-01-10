@@ -81,6 +81,9 @@ export default {
   },
   methods: {
     async submitForm() {
+      // if (window.sessionStorage.getItem('code_token')) {
+      //   window.sessionStorage.removeItem('code_token')
+      // }
       if (!this.loginForm.user_id) {
         return false;
       } else if (!this.loginForm.user_pwd) {
@@ -98,6 +101,9 @@ export default {
       })
     },
     async register() {
+      // if (window.sessionStorage.getItem('code_token')) {
+      //   window.sessionStorage.removeItem('code_token')
+      // }
       if (this.registerForm.user_name == '' || this.registerForm.user_id == "" || this.registerForm.user_pwd == "" || !this.registerForm.iphone || !this.registerForm.email) {
         alert('注册失败，请填写完整表单');
         return;
@@ -115,8 +121,8 @@ export default {
       $.post('/user', this.registerForm).then(res => {
         if (res.code == 200) {
           alert('注册成功')
-        this.$router.push('/manage')
-        window.sessionStorage.setItem('code_token', res.data.token)
+          this.$router.push('/manage')
+          window.sessionStorage.setItem('code_token', res.data.token)
         } else {
           this.get_check_code();
         }
