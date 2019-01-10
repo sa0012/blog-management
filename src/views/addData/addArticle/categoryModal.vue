@@ -3,6 +3,22 @@
     <section class="category-wrap">
       <h3 class="category-title">文章发布</h3>
       <el-row>
+        <el-col :span="4">文章标题：</el-col>
+        <el-col :span="20">
+          <el-input 
+            size="small"
+            v-model="config.title"></el-input>
+        </el-col>
+      </el-row>
+      <el-row style="padding: 20px 0;">
+        <el-col :span="4">文章作者：</el-col>
+        <el-col :span="20">
+          <el-input 
+            size="small"
+            v-model="config.author"></el-input>
+        </el-col>
+      </el-row>
+      <el-row>
         <el-col :span="4">文章标签：</el-col>
         <el-col :span="20">
           <el-tag
@@ -26,7 +42,7 @@
         </el-col>
       </el-row>
       <el-col :span="20" :offset="4" style="padding: 20px 0;">最多只能添加5个标签</el-col>
-      <el-row style="padding-top: 15px;">
+      <el-row style="padding-top: 20px;">
         <el-col :span="4">文章分类</el-col>
         <el-col :span="20">
           <el-select v-model="value" placeholder="请选择文章分类">
@@ -83,6 +99,8 @@ export default {
       inputValue: "",
       tagColor: "#fff",
       config: {
+        title: '',
+        author: '',
         article: '',
         category: "",
         tags: []

@@ -35,17 +35,8 @@
           </sq-tabpane>
           <sq-tabpane label="注册" name="name2">
             <el-form :model="registerForm" :rules="registerRules" ref="loginForm" style="padding-top: 40px;">
-              <el-form-item prop="user_name">
-                <el-input v-model="registerForm.user_name" placeholder="昵称"></el-input>
-              </el-form-item>
               <el-form-item prop="user_id">
                 <el-input v-model="registerForm.user_id" placeholder="账号"></el-input>
-              </el-form-item>
-              <el-form-item prop="iphone">
-                <el-input v-model="registerForm.iphone" placeholder="手机号码" maxlength="11"></el-input>
-              </el-form-item>
-              <el-form-item prop="email">
-                <el-input v-model="registerForm.email" placeholder="邮箱"></el-input>
               </el-form-item>
               <el-form-item prop="user_pwd">
                 <el-input type="password" placeholder="密码" v-model="registerForm.user_pwd"></el-input>

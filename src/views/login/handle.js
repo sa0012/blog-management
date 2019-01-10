@@ -13,12 +13,9 @@ export default {
         code_token: ''
       },
       registerForm: {
-        user_name: '',
         user_id: '',
         user_pwd: '',
         re_user_pwd: '',
-        iphone: '',
-        email: '',
         code: '',
         code_token: ''
       },
@@ -41,11 +38,6 @@ export default {
         }, ],
       },
       registerRules: {
-        user_name: [{
-          required: true,
-          message: '请输入昵称',
-          trigger: 'blur'
-        }, ],
         user_id: [{
           required: true,
           message: '请输入用户账号',
@@ -61,16 +53,6 @@ export default {
           message: '请确认密码',
           trigger: 'blur'
         }],
-        iphone: [{
-          required: true,
-          message: '请输入手机号码',
-          trigger: 'blur'
-        }, ],
-        email: [{
-          required: true,
-          message: '请输入邮箱',
-          trigger: 'blur'
-        }, ],
         code: [{
           required: true,
           message: '请输入验证码',
@@ -81,9 +63,6 @@ export default {
   },
   methods: {
     async submitForm() {
-      // if (window.sessionStorage.getItem('code_token')) {
-      //   window.sessionStorage.removeItem('code_token')
-      // }
       if (!this.loginForm.user_id) {
         return false;
       } else if (!this.loginForm.user_pwd) {
@@ -101,10 +80,7 @@ export default {
       })
     },
     async register() {
-      // if (window.sessionStorage.getItem('code_token')) {
-      //   window.sessionStorage.removeItem('code_token')
-      // }
-      if (this.registerForm.user_name == '' || this.registerForm.user_id == "" || this.registerForm.user_pwd == "" || !this.registerForm.iphone || !this.registerForm.email) {
+      if (this.registerForm.user_id == "" || this.registerForm.user_pwd == "") {
         alert('注册失败，请填写完整表单');
         return;
       }
@@ -133,7 +109,6 @@ export default {
         this.img_base64 = res.data.img
         this.loginForm.code_token = res.data.token
         this.registerForm.code_token = res.data.token
-        console.log(res, 'checkcode')
       })
     }
   },
