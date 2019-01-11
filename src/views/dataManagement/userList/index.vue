@@ -22,14 +22,13 @@
             <el-form-item label="店铺地址">
               <span class="table-text">{{ props.row.address }}</span>
             </el-form-item>
-            <!-- <el-form-item label="商品描述">
-              <span>{{ props.row.desc }}</span>
-            </el-form-item>-->
           </el-form>
         </template>
       </el-table-column>
-      <el-table-column label="用户 ID" prop="_id"></el-table-column>
-      <el-table-column label="用户头像">
+      <el-table-column type="index" width="50"></el-table-column>
+      <el-table-column label="注册日期" prop="date" width="140"></el-table-column>
+      <el-table-column label="用户 ID" prop="_id" width="240"></el-table-column>
+      <el-table-column label="用户头像" width="140">
         <template slot-scope="scope">
           <img
             class="user-avator"
@@ -39,9 +38,20 @@
           >
         </template>
       </el-table-column>
-      <el-table-column label="用户名" prop="user_id"></el-table-column>
+      <el-table-column label="用户名" prop="user_id" width="140"></el-table-column>
       <el-table-column label="用户地址" prop="address"></el-table-column>
     </el-table>
+    <el-col :span="24" style="padding-top: 15px;">
+      <el-pagination
+        background
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page.sync="currentPage1"
+        :page-size="100"
+        layout="total, prev, pager, next"
+        :total="1000"
+      ></el-pagination>
+    </el-col>
   </div>
 </template>
 
@@ -50,23 +60,27 @@ import Controller from "./handle";
 export default Controller;
 </script>
 
-<style lang="scss" scoped>
-.user-list {
-  width: 100%;
-  border: 1px solid #dfe6ec;
-  box-shadow: inset 0 2px 0 #f4f4f4;
-}
+<style>
 .demo-table-expand {
   font-size: 0;
 }
 .demo-table-expand label {
-  width: 90px;
+  width: 120px;
   color: #99a9bf;
 }
 .demo-table-expand .el-form-item {
   margin-right: 0;
   margin-bottom: 0;
   width: 50%;
+}
+</style>
+
+
+<style lang="scss" scoped>
+.user-list {
+  width: 100%;
+  border: 1px solid #dfe6ec;
+  box-shadow: inset 0 2px 0 #f4f4f4;
 }
 
 .table-text {

@@ -76,6 +76,7 @@ export default {
           setSession('code_token', res.data.token)
           setSession('userId', res.data._id)
           setSession('user_name', res.data.user_id)
+          this.$message.success('登陆成功')
           this.$router.push(`/manage`)
         } else {
           this.get_check_code()
@@ -99,11 +100,11 @@ export default {
 
       $.post('/user', this.registerForm).then(res => {
         if (res.code == 200) {
-          alert('注册成功')
-          this.$router.push(`/manage`)
           setSession('code_token', res.data.token)
           setSession('userId', res.data._id)
           setSession('user_name', res.data.user_name)
+          this.$message.success('注册成功')
+          this.$router.push(`/manage`)
         } else {
           this.get_check_code();
         }
