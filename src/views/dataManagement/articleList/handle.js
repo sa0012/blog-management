@@ -39,19 +39,19 @@ export default {
       this.$router.push('/addArticle?type=add')
     },
     modifyArticle(_id, user_id) {
-      // this.$router.push('/addArticle?type=modify')
-      let config = {
-        _id,
-        user_id,
-        tags: [
-          "更新"
-        ],
-        article: "更新的文章内容",
-        category: "更新的分类",
-        title: "更新的title",
-        author: "更新",
-      }
-      $.post('/article/updateArticle', config)
+      this.$router.push(`/addArticle?type=modify&_id=${_id}&user_id=${user_id}`)
+      // let config = {
+      //   _id,
+      //   user_id,
+      //   tags: [
+      //     "更新"
+      //   ],
+      //   article: "更新的文章内容",
+      //   category: "更新的分类",
+      //   title: "更新的title",
+      //   author: "更新",
+      // }
+      // $.post('/article/updateArticle', config)
     },
     deleteArticle(_id, user_id) {
       $.post('/article/removeArticle', { _id, user_id }).then(res => {

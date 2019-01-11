@@ -3,6 +3,7 @@ import {
 } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import CategoryModal from './categoryModal'
+import $ from '@/utils'
 
 
 
@@ -11,8 +12,26 @@ export default {
   data() {
     return {
       article: '',
-      showCategory: false
+      showCategory: false,
+      articleId: '',
+      userId: '',
+      type: '',
+      articleConfig: {
+        title: '',
+        author: '',
+        category: '',
+        article: '',
+        tags: []
+      }
     }
+  },
+  created() {
+    try {
+      this.articleId = this.$route.query._id || '';
+      this.userId = this.$route.query.user_id || '';
+      this.type = this.$route.query.type || ''
+    } catch (e) {}
+
   },
   computed: {
     contentHeight() {
@@ -20,12 +39,30 @@ export default {
     },
   },
   methods: {
+    getUpdateArticle(value) {
+      this.article = value;
+    },
     editorChange(value, render) {
       this.article = value;
     },
     submit() {
-      console.log(this.config, 'config')
+      if (this.type) {}
       this.showCategory = true;
+    },
+    lookArticle(_id, user_id) {
+      $.post('/article/findOneArticle', {
+        _id,
+        user_id
+      }).then(res => {
+        console.log(res)
+        this.article = res.data.article
+        Object.assign(this.articleConfig, res.data)
+      })
+    },
+  },
+  mounted() {
+    if (this.type === 'modify') {
+      this.lookArticle(this.articleId, this.userId);
     }
   },
   components: {

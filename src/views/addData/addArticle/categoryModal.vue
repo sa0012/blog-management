@@ -5,17 +5,13 @@
       <el-row>
         <el-col :span="4">文章标题：</el-col>
         <el-col :span="20">
-          <el-input 
-            size="small"
-            v-model="config.title"></el-input>
+          <el-input size="small" v-model="config.title"></el-input>
         </el-col>
       </el-row>
       <el-row style="padding: 20px 0;">
         <el-col :span="4">文章作者：</el-col>
         <el-col :span="20">
-          <el-input 
-            size="small"
-            v-model="config.author"></el-input>
+          <el-input size="small" v-model="config.author"></el-input>
         </el-col>
       </el-row>
       <el-row>
@@ -57,7 +53,7 @@
       </el-row>
       <el-col :span="24" style="margin-top: 60px; text-align: right;">
         <el-button @click="close">取消</el-button>
-        <el-button @click="publish">发布文章</el-button>
+        <el-button @click="publish">{{ type === 'modify' ? '修改文章' : '发布文章' }}</el-button>
       </el-col>
       <i class="el-icon-close close-icon" @click="close"></i>
     </section>
@@ -75,6 +71,22 @@ export default {
     article: {
       type: String,
       default: ""
+    },
+    articleId: {
+      type: String,
+      default: ""
+    },
+    userId: {
+      type: String,
+      default: ""
+    },
+    type: {
+      type: String,
+      default: ""
+    },
+    articleConfig: {
+      type: Object,
+      default: null
     }
   },
   data() {
@@ -99,24 +111,31 @@ export default {
       inputValue: "",
       tagColor: "#fff",
       config: {
-        title: '',
-        author: '',
-        article: '',
+        title: "",
+        author: "",
+        article: "",
         category: "",
         tags: []
       }
     };
   },
+  created() {
+    this.config.title = this.articleConfig.title;
+    this.config.author = this.articleConfig.author;
+    this.config.article = this.articleConfig.article;
+    this.config.category = this.articleConfig.category;
+    this.config.tags = JSON.parse(JSON.stringify(this.articleConfig.tags));
+  },
   methods: {
     publish() {
       this.config.article = this.article;
-      let category = this.options.filter((item, index) => item.value === this.value);
-      console.log(category, 'category')
+      let category = this.options.filter(
+        (item, index) => item.value === this.value
+      );
       this.config.category = this.options[this.value];
       this.config.category = category[0].label;
-      console.log(this.config, 'config')
       if (!this.config.article) {
-        this.$message.warning('你还没有填写文章内容');
+        this.$message.warning("你还没有填写文章内容");
         return;
       } else if (this.config.tags.length <= 0) {
         this.$message.warning("请添加文章标签");
@@ -125,14 +144,21 @@ export default {
         this.$message.warning("文章标签不能超过5个");
         return;
       } else if (!this.config.category) {
-        this.$message.warning('请选择一个文章分类');
+        this.$message.warning("请选择一个文章分类");
         return;
-      } 
-      $.post("/article/addArticle", this.config).then(res => {
-        this.$message.success('文章发布成功')
-        this.$emit("update:showCategory", false);
-        console.log(res, "article");
-      });
+      }
+      if (this.type === "modify") {
+        $.post('/article/updateArticle', this.config).then(res => {
+          this.$message.success("文章修改成功");
+          this.$emit("update:showCategory", false);
+          this.$emit('updateArticle', res.data)
+        })
+      } else {
+        $.post("/article/addArticle", this.config).then(res => {
+          this.$message.success("文章发布成功");
+          this.$emit("update:showCategory", false);
+        });
+      }
     },
     handleClose(tag) {
       this.config.tags.splice(this.config.tags.indexOf(tag), 1);

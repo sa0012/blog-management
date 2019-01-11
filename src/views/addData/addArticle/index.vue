@@ -9,11 +9,16 @@
     <div class="show-template" :style="{ height: `${contentHeight - 100}px` }">
       <mavon-editor 
         class="compile-md" 
-        style="height: 100%;"
+        v-model="article"
+        :style="{ height: `${contentHeight - 100}px` }"
         @change="editorChange"></mavon-editor>
     </div>
 
-    <category-modal :showCategory.sync="showCategory" :article="article"></category-modal>
+    <category-modal 
+      :showCategory.sync="showCategory" 
+      :type="type"
+      :articleConfig="articleConfig"
+    ></category-modal>
   </div>
 </template>
 

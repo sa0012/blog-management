@@ -69,16 +69,6 @@ const router = new Router({
           // 留言列表
           component: () => import('@/views/dataManagement/leaveList')
         },
-        {
-          path: '/adminList',
-          name: 'adminList',
-          meta:{
-            requiresAuth: true,
-            title: ['数据管理', '管理员列表']
-          },
-          // 管理员列表
-          component: () => import('@/views/dataManagement/adminList')
-        },
 
         // 添加数据
         {
@@ -132,7 +122,7 @@ const router = new Router({
           name: 'adminSet',
           meta:{
             requiresAuth: true,
-            title: ['设置', '管理员设置']
+            title: ['设置', '个人中心']
           },
           // 管理员设置
           component: () => import('@/views/setting/adminSet')

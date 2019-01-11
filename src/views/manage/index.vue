@@ -30,7 +30,6 @@
             <el-menu-item index="articleList">文章列表</el-menu-item>
             <el-menu-item index="commentList">评论列表</el-menu-item>
             <el-menu-item index="leaveList">留言列表</el-menu-item>
-            <el-menu-item index="adminList">管理员列表</el-menu-item>
           </el-submenu>
           <el-submenu index="3">
             <template slot="title">
@@ -55,7 +54,7 @@
             <template slot="title">
               <i class="el-icon-setting"></i>设置
             </template>
-            <el-menu-item index="adminSet">管理员设置</el-menu-item>
+            <el-menu-item index="adminSet">个人中心</el-menu-item>
           </el-submenu>
           <el-submenu index="7">
             <template slot="title">
