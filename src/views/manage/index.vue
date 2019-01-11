@@ -67,9 +67,9 @@
       </el-col>
       <el-col :span="20" style="height: 100%; overflow: hidden;">
         <top-tip></top-tip>
-        <keep-alive>
+        <!-- <keep-alive> -->
           <router-view  :style="{ height: `${contentHeight}px` }"></router-view>
-        </keep-alive>
+        <!-- </keep-alive> -->
       </el-col>
     </el-row>
   </div>

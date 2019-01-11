@@ -38,16 +38,32 @@ export default {
     addArticle() {
       this.$router.push('/addArticle?type=add')
     },
-    modifyArticle() {
-      this.$router.push('/addArticle?type=modify')
+    modifyArticle(_id, user_id) {
+      // this.$router.push('/addArticle?type=modify')
+      let config = {
+        _id,
+        user_id,
+        tags: [
+          "更新"
+        ],
+        article: "更新的文章内容",
+        category: "更新的分类",
+        title: "更新的title",
+        author: "更新",
+      }
+      $.post('/article/updateArticle', config)
     },
-    deleteArticle(article_id) {
-      $.post('/article/removeArticle', { article_id }).then(res => {
+    deleteArticle(_id, user_id) {
+      $.post('/article/removeArticle', { _id, user_id }).then(res => {
         console.log(res, 'delete')
+        this.config.page = 1;
+        this.getArticleList();
       })
     },
-    lookArticle() {
-      
+    lookArticle(_id, user_id) {
+      $.post('/article/findOneArticle', {_id, user_id}).then(res => {
+        console.log(res)
+      })
     },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);

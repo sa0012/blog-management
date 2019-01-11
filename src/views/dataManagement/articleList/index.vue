@@ -43,9 +43,9 @@
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
           <el-button @click="addArticle" type="text" size="small">增加</el-button>
-          <el-button type="text" size="small" @click="deleteArticle(scope.row._id)">删除</el-button>
-          <el-button type="text" size="small" @click="modifyArticle(scope.row)">修改</el-button>
-          <el-button type="text" size="small" @click="lookArticle(scope.row)">查看</el-button>
+          <el-button type="text" size="small" @click="deleteArticle(scope.row._id, scope.row.user_id)">删除</el-button>
+          <el-button type="text" size="small" @click="modifyArticle(scope.row._id, scope.row.user_id)">修改</el-button>
+          <el-button type="text" size="small" @click="lookArticle(scope.row._id, scope.row.user_id)">查看</el-button>
         </template>
       </el-table-column>
     </el-table>
