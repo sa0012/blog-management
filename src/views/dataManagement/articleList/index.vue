@@ -57,7 +57,6 @@
         :page-size="1"
         layout="total, prev, pager, next"
         :total="pagination.total"
-        @updateArticle="getUpdateArticle"
       ></el-pagination>
     </el-col>
   </div>

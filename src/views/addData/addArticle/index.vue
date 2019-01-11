@@ -7,17 +7,19 @@
       </el-col>
     </el-row>
     <div class="show-template" :style="{ height: `${contentHeight - 100}px` }">
-      <mavon-editor 
-        class="compile-md" 
+      <mavon-editor
+        class="compile-md"
         v-model="article"
         :style="{ height: `${contentHeight - 100}px` }"
-        @change="editorChange"></mavon-editor>
+        @change="editorChange"
+      ></mavon-editor>
     </div>
 
-    <category-modal 
-      :showCategory.sync="showCategory" 
+    <category-modal
+      :showCategory.sync="showCategory"
       :type="type"
       :articleConfig="articleConfig"
+      @updateArticle="getUpdateArticle"
     ></category-modal>
   </div>
 </template>
