@@ -18,6 +18,7 @@
     <category-modal
       :showCategory.sync="showCategory"
       :type="type"
+      :article="article"
       :articleConfig="articleConfig"
       @updateArticle="getUpdateArticle"
     ></category-modal>

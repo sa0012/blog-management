@@ -43,6 +43,7 @@ export default {
       this.article = value;
     },
     editorChange(value, render) {
+      console.log(value)
       this.article = value;
     },
     submit() {
@@ -56,7 +57,7 @@ export default {
       }).then(res => {
         console.log(res)
         this.article = res.data.article
-        Object.assign(this.articleConfig, res.data)
+        this.articleConfig = Object.assign({}, res.data)
       })
     },
   },

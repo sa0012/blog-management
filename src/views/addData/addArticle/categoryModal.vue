@@ -119,21 +119,42 @@ export default {
       }
     };
   },
-  created() {
-    this.config.title = this.articleConfig.title;
-    this.config.author = this.articleConfig.author;
-    this.config.article = this.articleConfig.article;
-    this.config.category = this.articleConfig.category;
-    this.config.tags = JSON.parse(JSON.stringify(this.articleConfig.tags));
+  watch: {
+    showCategory(newVal, oldVal) {
+      if (this.type === "modify" && newVal) {
+        try {
+          console.log(this.articleConfig, "configArticle");
+          this.config.title = this.articleConfig.title;
+          this.config.author = this.articleConfig.author;
+          this.config.category = this.articleConfig.category;
+          this.config.tags = JSON.parse(
+            JSON.stringify(this.articleConfig.tags)
+          );
+          this.config._id = this.articleConfig._id;
+          this.config.user_id = this.articleConfig.user_id;
+
+          this.options.forEach((item, index) => {
+            if (item.label === this.config.category) {
+              this.value = item.value;
+            }
+          });
+        } catch (e) {}
+      }
+    }
   },
+  created() {},
   methods: {
     publish() {
       this.config.article = this.article;
-      let category = this.options.filter(
-        (item, index) => item.value === this.value
-      );
-      this.config.category = this.options[this.value];
-      this.config.category = category[0].label;
+      try {
+        let category = this.options.filter(
+          (item, index) => item.value === this.value
+        );
+        this.config.category = this.options[this.value];
+        this.config.category = category[0].label;
+      } catch (e) {}
+
+      console.log(this.config, this.articleConfig, "config");
       if (!this.config.article) {
         this.$message.warning("你还没有填写文章内容");
         return;
@@ -148,15 +169,24 @@ export default {
         return;
       }
       if (this.type === "modify") {
-        $.post('/article/updateArticle', this.config).then(res => {
-          this.$message.success("文章修改成功");
-          this.$emit("update:showCategory", false);
-          this.$emit('updateArticle', res.data)
-        })
+        console.log(this.config, "modify");
+        $.post("/article/updateArticle", this.config).then(res => {
+          if (res.code == 200) {
+            this.config.category = res.data.category;
+            this.config.title = res.data.title;
+            this.config.author = res.data.category;
+            this.config.tags = JSON.parse(JSON.stringify(res.data.tags));
+            this.$message.success("文章修改成功");
+            this.$emit("update:showCategory", false);
+            this.$emit("updateArticle", res.data.article);
+          }
+        });
       } else {
+        console.log(this.config, "add");
         $.post("/article/addArticle", this.config).then(res => {
           this.$message.success("文章发布成功");
           this.$emit("update:showCategory", false);
+          this.$emit("updateArticle", res.data);
         });
       }
     },
