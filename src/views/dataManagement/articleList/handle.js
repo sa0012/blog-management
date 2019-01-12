@@ -2,6 +2,7 @@ import $ from '@/utils';
 import {
   getSession
 } from '@/common/mutils';
+import LookArticle from './lookArticle'
 
 export default {
   name: 'userList',
@@ -18,7 +19,9 @@ export default {
         total: 0
       },
       search: '',
-      currentPage1: 5
+      currentPage1: 5,
+      showArticle: false,
+      articleObj: {}
     }
   },
   methods: {
@@ -60,10 +63,13 @@ export default {
         this.getArticleList();
       })
     },
-    lookArticle(_id, user_id) {
-      $.post('/article/findOneArticle', {_id, user_id}).then(res => {
-        console.log(res)
-      })
+    lookArticle(article) {
+      // $.post('/article/findOneArticle', {_id, user_id}).then(res => {
+      //   console.log(res)
+      // })
+      this.showArticle = true;
+      console.log(article)
+      this.articleObj = Object.assign({}, article)
     },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
@@ -76,5 +82,8 @@ export default {
   },
   mounted() {
     this.getArticleList()
+  },
+  components: {
+    LookArticle
   }
 }

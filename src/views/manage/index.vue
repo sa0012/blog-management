@@ -1,7 +1,7 @@
 <template>
   <div class="manage fillcontain">
     <el-row style="height: 100%;">
-      <el-col :span="4" style="min-height: 100%; background-color: #324057;">
+      <el-col :span="4" style="height: 100%; overflow: auto; background-color: #324057;">
         <div class="user-msg">
           <img src="../../assets/images/default.jpg" alt="avator" class="user-avator">
           <div class="user-name">{{ userName }}</div>
@@ -9,7 +9,6 @@
 
         <el-menu
           :default-active="defaultActive"
-          style="min-height: 100%;"
           theme="dark"
           class="el-menu-vertical-demo"
           @open="handleOpen"

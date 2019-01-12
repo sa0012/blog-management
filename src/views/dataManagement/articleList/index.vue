@@ -42,7 +42,7 @@
       <el-table-column label="分类" prop="category" width="140"></el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
-          <el-button plain size="small" @click="lookArticle(scope.row._id, scope.row.user_id)">查看</el-button>
+          <el-button plain size="small" @click="lookArticle(scope.row)">查看</el-button>
           <el-button plain size="small" @click="addArticle(scope.row._id, scope.row.user_id)">添加</el-button>
           <el-button plain size="small" @click="modifyArticle(scope.row._id, scope.row.user_id)">修改</el-button>
           <el-button type="danger" size="small" @click="deleteArticle(scope.row._id, scope.row.user_id)">删除</el-button>
@@ -59,6 +59,10 @@
         :total="pagination.total"
       ></el-pagination>
     </el-col>
+
+    <look-article
+      :showArticle.sync="showArticle"
+      :articleObj="articleObj"></look-article>
   </div>
 </template>
 

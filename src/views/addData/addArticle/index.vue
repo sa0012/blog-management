@@ -10,6 +10,7 @@
       <mavon-editor
         class="compile-md"
         v-model="article"
+        codeStyle="vs2015"
         :style="{ height: `${contentHeight - 100}px` }"
         @change="editorChange"
       ></mavon-editor>
