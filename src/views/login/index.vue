@@ -66,6 +66,7 @@
         </sq-tabs>
       </section>
     </transition>
+    <div @click="githubLogin">github登录</div>
   </div>
 </template>
 
