@@ -1,11 +1,13 @@
 import TopTip from '@/components/topTip'
 import { getSession } from '@/common/mutils';
+import avatarImg from '../../assets/images/default.jpg';
 
 export default {
   name: 'Manage',
   data() {
     return {
-      userName: ''
+      userName: '',
+      avatar: avatarImg
     }
   },
   computed: {
@@ -26,6 +28,9 @@ export default {
   },
   created() {
     this.userName = getSession('user_name')
+    if (getSession('avatar')) {
+      this.avatar = getSession('avatar')
+    }
   },
   mounted() {
   },

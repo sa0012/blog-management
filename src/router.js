@@ -17,6 +17,11 @@ const router = new Router({
       component: () => import('@/views/login')
     },
     {
+      path: '/github',
+      name: 'Github',
+      component: () => import('@/views/login/github')
+    },
+    {
       path: '/manage',
       name: 'Manage',
       meta:{

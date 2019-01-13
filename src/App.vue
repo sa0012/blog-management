@@ -6,4 +6,5 @@
 
 <style lang="scss">
 @import "./assets/style/reset.scss";
+@import "./assets/icon/iconfont.css";
 </style>

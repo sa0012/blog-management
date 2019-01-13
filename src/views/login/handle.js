@@ -66,12 +66,12 @@ export default {
   },
   methods: {
     githubLogin() {
-      // $.get('/github/login').then(res => {
-      //   // console.log(res, 'github')
-      //   window.location.href = res.data
-      // })
-      window.location.href = 'https://github.com/login/oauth/authorize?client_id=1f08860dca3e7b4499a5&redirect_uri=http://192.168.31.230:8080/login&scope=User';
-      window.localStorage.setItem('GITHUB_LOGIN_REDIRECT_URL', `${this.$route.path}?comment=new`);
+      $.get('/github/login').then(res => {
+        window.location.href = res.data
+        window.localStorage.setItem('GITHUB_LOGIN_REDIRECT_URL', `${this.$route.path}?comment=new`);
+
+      })
+      // window.location.href = 'https://github.com/login/oauth/authorize?client_id=1f08860dca3e7b4499a5&redirect_uri=http://192.168.31.230:8080/login&scope=User';
 
     },
     async submitForm() {
@@ -114,6 +114,7 @@ export default {
           setSession('code_token', res.data.token)
           setSession('userId', res.data._id)
           setSession('user_name', res.data.user_name)
+          setSession('avatar', res.data.github_avator)
           this.$message.success('注册成功')
           this.$router.push(`/manage`)
         } else {
@@ -132,16 +133,6 @@ export default {
   mounted() {
     this.get_check_code()
     this.showLogin = true;
-
-    if (this.$route.query.code) {
-      $.get(`/oauth/callback?code=${this.$route.query.code}`).then(res => {
-        setSession('code_token', res.data.token)
-        setSession('userId', res.data.github_id)
-        setSession('user_name', res.data.github_name)
-        this.$message.success(res.msg)
-        this.$router.push(`/manage`)
-      })
-    }
   },
   components: {
     SqTabs,

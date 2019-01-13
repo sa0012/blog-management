@@ -34,7 +34,12 @@
             </el-form>
           </sq-tabpane>
           <sq-tabpane label="注册" name="name2">
-            <el-form :model="registerForm" :rules="registerRules" ref="loginForm" style="padding-top: 40px;">
+            <el-form
+              :model="registerForm"
+              :rules="registerRules"
+              ref="loginForm"
+              style="padding-top: 40px;"
+            >
               <el-form-item prop="user_id">
                 <el-input v-model="registerForm.user_id" placeholder="账号"></el-input>
               </el-form-item>
@@ -64,9 +69,22 @@
             </el-form>
           </sq-tabpane>
         </sq-tabs>
+        <el-row class="login-icon-wrap">
+          <el-col :span="6">
+            <i class="iconfont icon-github login-icon" @click="githubLogin"></i>
+          </el-col>
+          <el-col :span="6">
+            <i class="iconfont icon-weixin login-icon"></i>
+          </el-col>
+          <el-col :span="6">
+            <i class="iconfont icon-qq login-icon"></i>
+          </el-col>
+          <el-col :span="6">
+            <i class="iconfont icon-weibo login-icon"></i>
+          </el-col>
+        </el-row>
       </section>
     </transition>
-    <div @click="githubLogin">github登录</div>
   </div>
 </template>
 
@@ -122,6 +140,19 @@ export default Controller;
 
 .form-checkcode {
   float: right;
+}
+
+.login-icon-wrap {
+  width: 160px;
+  margin: 0 auto;
+
+  .login-icon {
+    font-size: 26px;
+
+    &:hover {
+      color: green;
+    }
+  }
 }
 </style>
 

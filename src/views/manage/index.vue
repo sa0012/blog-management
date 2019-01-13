@@ -3,7 +3,7 @@
     <el-row style="height: 100%;">
       <el-col :span="4" style="height: 100%; overflow: auto; background-color: #324057;">
         <div class="user-msg">
-          <img src="../../assets/images/default.jpg" alt="avator" class="user-avator">
+          <img :src="avatar" alt="avator" class="user-avator">
           <div class="user-name">{{ userName }}</div>
         </div>
 
