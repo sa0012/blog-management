@@ -40,10 +40,9 @@ export default {
   },
   methods: {
     getUpdateArticle(value) {
-      this.article = value;
+      this.article = value.article;
     },
     editorChange(value, render) {
-      console.log(value)
       this.article = value;
     },
     submit() {
@@ -55,7 +54,6 @@ export default {
         _id,
         user_id
       }).then(res => {
-        console.log(res)
         this.article = res.data.article
         this.articleConfig = Object.assign({}, res.data)
       })
