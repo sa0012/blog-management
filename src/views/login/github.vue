@@ -16,11 +16,10 @@ export default {
     if (this.$route.query.code) {
       $.get(`/oauth/callback?code=${this.$route.query.code}`).then(res => {
         setSession("code_token", res.data.token);
-        setSession("userId", res.data.github_id);
-        setSession("user_name", res.data.github_name);
-        setSession("avatar", res.data.github_avator);
+        setSession("userId", res.data.user_id);
+        setSession("avatar", res.data.avatar);
         this.$message.success(res.msg);
-        this.$router.push(`/manage`);
+        this.$router.replace(`/manage`);
       });
     }
   }

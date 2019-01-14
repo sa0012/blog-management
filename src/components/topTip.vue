@@ -39,8 +39,9 @@ export default {
     }
   },
   created() {
-    this.userName = getSession("user_name");
-    if (getSession('avatar')) {
+    this.userName = getSession("userId");
+    console.log(getSession('avatar'), 'skskkskksk')
+    if (getSession('avatar') != 'undefined') {
       this.avatar = getSession('avatar')
     }
   },

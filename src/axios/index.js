@@ -40,7 +40,7 @@ instance.interceptors.response.use(
       if(response.status == 401) {
         let msg = response.data || '请重新登录!';
         new Vue().$message.error(msg)
-        window.sessionStorage.removeItem('code_token')  // token过期,清除
+        window.sessionStorage.clear()  // token过期,清除
         router.replace({ //跳转到登录页面
             path: '/',
             // 添加一个重定向后缀，等登录以后再到这里来

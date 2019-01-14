@@ -1,6 +1,7 @@
 import $ from '@/utils';
 import {
-  setSession
+  setSession,
+  removeSession
 } from '@/common/mutils';
 import SqTabs from "@/components/tabs/src";
 import SqTabpane from "@/components/tabpane/src";
@@ -113,7 +114,7 @@ export default {
         if (res.code == 200) {
           setSession('code_token', res.data.token)
           setSession('userId', res.data._id)
-          setSession('user_name', res.data.user_name)
+          setSession('user_name', res.data.user_id)
           setSession('avatar', res.data.github_avator)
           this.$message.success('注册成功')
           this.$router.push(`/manage`)

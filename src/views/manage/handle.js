@@ -27,8 +27,8 @@ export default {
     }
   },
   created() {
-    this.userName = getSession('user_name')
-    if (getSession('avatar')) {
+    this.userName = getSession('userId')
+    if (getSession('avatar') != 'undefined') {
       this.avatar = getSession('avatar')
     }
   },
