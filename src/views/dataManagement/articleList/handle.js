@@ -34,7 +34,7 @@ export default {
             list[index].edit_time = $.timeFormat(article.edit_time - 0)
           })
           this.tableData = res.data.list;
-        } catch(e) {}
+        } catch (e) {}
         this.pagination = res.data.pagination
       })
     },
@@ -57,7 +57,10 @@ export default {
       // $.post('/article/updateArticle', config)
     },
     deleteArticle(_id, user_id) {
-      $.post('/article/removeArticle', { _id, user_id }).then(res => {
+      $.post('/article/removeArticle', {
+        _id,
+        user_id
+      }).then(res => {
         console.log(res, 'delete')
         this.config.page = 1;
         this.getArticleList();
@@ -78,7 +81,7 @@ export default {
       this.config.page = val;
       this.getArticleList()
       console.log(`当前页: ${val}`);
-    }
+    },
   },
   mounted() {
     this.getArticleList()
