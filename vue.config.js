@@ -4,6 +4,7 @@ module.exports = {
   runtimeCompiler: true,
   productionSourceMap: false,
   devServer: {
+    port: 8088,
     proxy: {
       '/api': {
         target: "http://localhost:7778",
