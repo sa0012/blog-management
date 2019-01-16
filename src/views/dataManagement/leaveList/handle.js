@@ -38,7 +38,13 @@ export default {
         size: 10,
         article_id: ''
       },
-      fatherCommentList: []
+      queryReplyComment: {
+        page: 1,
+        size: 10,
+        comment_id: ''
+      },
+      fatherCommentList: [],
+      childCommentList: []
     }
   },
   methods: {
@@ -65,6 +71,12 @@ export default {
     },
     getReplyComment() {
       $.post('/comment/replySave', this.childComment)
+    },
+    queryReplyCommentsList(id) {
+      this.queryReplyComment.comment_id = id;
+      $.post('/comment/queryReleyCommentsList', this.queryReplyComment).then(res => {
+        this.childCommentList = res.data.list;
+      })
     }
   },
   mounted() {

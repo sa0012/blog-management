@@ -9,16 +9,26 @@
       <div style="background: #999; padding: 5px 10px;" @click="commentTest">提交评论</div>
     </div>
     <ul>
-        <li v-for="(comment, index) in fatherCommentList" :key="index">
-          <div class="user-msg">
-            <img :src="comment.user.user_avatar" alt class="user-avatar">
-            <div class="user-name">{{ comment.user.user_name }}</div>
-          </div>
-          <div class="user-comment">{{ comment.content }}</div>
-        </li>
-      </ul>
-          <input type="text" placeholder="请输入评论内容" v-model="childComment.content">
-          <span @click="getReplyComment">回复</span>
+      <li v-for="(comment, index) in fatherCommentList" :key="index" class="comment-item">
+        <div class="user-msg">
+          <img :src="comment.user.user_avatar" alt class="user-avatar">
+          <div class="user-name">{{ comment.user.user_name }}</div>
+        </div>
+        <div class="user-comment">{{ comment.content }}</div>
+        <div @click="queryReplyCommentsList(comment._id)">点击查看</div>
+        <ul class="child-item">
+          <li class="child-comment" v-for="(childComment, index) in childCommentList" :key="index">
+            <div class="user-msg">
+              <img :src="childComment.user.user_avatar" alt class="user-avatar">
+              <div class="user-name">{{ childComment.user.user_name }}</div>
+            </div>
+            <div class="user-comment">{{ childComment.content }} &nbsp;&nbsp;//@{{ comment.user.user_name }}: {{ comment.content }}</div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <input type="text" placeholder="请输入评论内容" v-model="childComment.content">
+    <span @click="getReplyComment">回复</span>
   </div>
 </template>
 
@@ -28,6 +38,13 @@ export default Controller;
 </script>
 
 <style lang="scss" scoped>
+.comment-item {
+  padding-bottom: 15px;
+}
+
+.child-item {
+  padding: 10px 15px;
+}
 .user-avatar {
   width: 30px;
 }
