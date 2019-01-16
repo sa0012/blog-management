@@ -7,13 +7,38 @@ export default {
       commentList: {
         article_id: '',
         content: '',
-        fromId: '',
-        fromName: 'sa0012',
-        fromAvatar: 'https://avatars3.githubusercontent.com/u/24355136?v=4'
+        user: {
+          user_id: '',
+          user_name: 'sa0012',
+          user_avatar: 'https://avatars3.githubusercontent.com/u/24355136?v=4'
+        }
+      },
+      childComment: {
+        comment_id: '5c3ebb28c496d8c51576005a',
+        user: {
+          user_id: '5c3c20482975bdf2f027c822',
+          user_name: 'sa0012',
+          user_avatar: 'https://avatars3.githubusercontent.com/u/24355136?v=4'
+        },
+
+        // 被评论人信息
+        reply_to_user: {
+          user_name: 'sa0012',
+          user_id: '5c3c20482975bdf2f027c822',
+          user_avatar: 'https://avatars3.githubusercontent.com/u/24355136?v=4'
+        },
+        //评论内容
+        content: '',
       },
       article: {
 
-      }
+      },
+      queryFatherComment: {
+        page: 1,
+        size: 10,
+        article_id: ''
+      },
+      fatherCommentList: []
     }
   },
   methods: {
@@ -24,11 +49,22 @@ export default {
       }).then(res => {
         this.article = Object.assign({}, res.data)
         this.commentList.article_id = res.data._id
-        this.commentList.fromId = res.data.user_id
+        this.commentList.user.user_id = res.data.user_id
+        this.queryCommentList(res.data._id)
+      })
+    },
+    queryCommentList(articleId) {
+      this.queryFatherComment.article_id = articleId;
+      $.post('/comment/queryCommentList', this.queryFatherComment).then(res => {
+        console.log(res.data.list, 'lsit')
+        this.fatherCommentList = res.data.list;
       })
     },
     commentTest() {
-      $.post('/comment/saveComment', this.commentList)
+      $.post('/comment/saveComment', this.commentList).then(res => {})
+    },
+    getReplyComment() {
+      $.post('/comment/replySave', this.childComment)
     }
   },
   mounted() {
