@@ -77,6 +77,9 @@ export default {
       $.post('/comment/queryReleyCommentsList', this.queryReplyComment).then(res => {
         this.childCommentList = res.data.list;
       })
+    },
+    uploadTest() {
+      $.post('/upload/imgUpload')
     }
   },
   mounted() {
