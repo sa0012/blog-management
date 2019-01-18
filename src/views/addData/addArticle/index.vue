@@ -11,6 +11,8 @@
         class="compile-md"
         v-model="article"
         codeStyle="vs2015"
+        @imgAdd="imgAdd" 
+        @imgDel="imgDel"
         :style="{ height: `${contentHeight - 100}px` }"
         @change="editorChange"
       ></mavon-editor>
