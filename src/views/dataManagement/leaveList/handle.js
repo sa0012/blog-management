@@ -80,7 +80,7 @@ export default {
       })
     },
     uploadTest() {
-      $.post('/upload/imgUpload').then(res => {
+      $.get('/upload/imgUpload').then(res => {
         this.imgUrl = res.data.key
       })
     }
