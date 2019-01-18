@@ -30,6 +30,7 @@
     <input type="text" placeholder="请输入评论内容" v-model="childComment.content">
     <span @click="getReplyComment">回复</span>
     <div @click="uploadTest" style=" width: 100px; padding: 10px 15px; background: blue;">图片上传测试</div>
+    <img v-if="imgUrl" :src="imgUrl" alt="">
   </div>
 </template>
 

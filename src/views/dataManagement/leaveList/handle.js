@@ -44,7 +44,8 @@ export default {
         comment_id: ''
       },
       fatherCommentList: [],
-      childCommentList: []
+      childCommentList: [],
+      imgUrl: ''
     }
   },
   methods: {
@@ -79,7 +80,9 @@ export default {
       })
     },
     uploadTest() {
-      $.post('/upload/imgUpload')
+      $.post('/upload/imgUpload').then(res => {
+        this.imgUrl = res.data.key
+      })
     }
   },
   mounted() {
