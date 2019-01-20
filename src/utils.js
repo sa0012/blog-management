@@ -78,12 +78,16 @@ let utils = {
     num : '0' + num,
   ele: (ele, all) => all ?
     document.querySelectorAll(ele) : document.querySelector(ele),
-  get: (url, params = {}, method = 'get') => new Promise((resolve, reject) => {
+  get: (url, params = {}, method = 'get', headers) => new Promise((resolve, reject) => {
     let req = method === 'get' ? {
       params: params
     } : params
     url = '/api' + url;
-    window.axios[method](url, req).then(res => {
+    headers = headers && headers.headers ? headers.headers : {
+      "Content-Type": "application/json; charset=utf-8"
+    }
+    console.log(headers, 'headers')
+    window.axios[method](url, req, headers).then(res => {
       if (res.data.code != 200) {
         new Vue().$message.error(res.data.msg)
       }
@@ -92,7 +96,7 @@ let utils = {
       reject && reject(error)
     })
   }),
-  post: (url, params) => utils.get(url, params, 'post'),
+  post: (url, params, headers) => utils.get(url, params, 'post', headers),
   numberToChinese: (number, integer) => {
     if (integer) {
       return number ? (number / 10000 >= 1 ? (number / 10000) + '万' : number) : ''

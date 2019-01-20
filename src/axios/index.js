@@ -4,11 +4,11 @@ import router from '../router';
 
 // 全局设置
 axios.defaults.timeout = 10000; // 时间超时设置10s
-axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
+// axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 
 // 创建一个axios的实列
 const instance = axios.create();
-instance.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
+// instance.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 
 axios.interceptors.request.use = instance.interceptors.request.use;
 
