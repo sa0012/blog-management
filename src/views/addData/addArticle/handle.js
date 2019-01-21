@@ -42,9 +42,19 @@ export default {
     // 绑定@imgAdd event
     imgAdd(pos, $file) {
       // 第一步.将图片上传到服务器.
-      var formdata = new FormData();
-      formdata.append('image', $file);
-      console.log($file, 'file')
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      };
+      const formdata = new FormData();
+      formdata.append("file", $file);
+      console.log($file, 'formdata')
+      // 从后端获取上传凭证token
+      $.post("/upload/artiUploadImg", formdata, config).then(res => {
+        console.log(res, "imgUrl");
+        $vm.$img2Url(pos, res.data.key);
+      });
       // axios({
       //   url: 'server url',
       //   method: 'post',
