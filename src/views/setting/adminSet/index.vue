@@ -48,7 +48,7 @@
 </template>
 <script>
 import $ from "@/utils";
-import { getSession } from "@/common/mutils";
+import { setSession, getSession } from "@/common/mutils";
 export default {
   data() {
     return {
@@ -102,6 +102,7 @@ export default {
       // formdata.append("key", keyname);
       $.post("/upload/getUploadImg", formdata, config).then(res => {
         this.form.avatar = res.data.key;
+        setSession('avatar', res.data.key)
         console.log(res, "imgUrl");
       });
       // await $.get("/upload/getUploadToken").then(res => {
@@ -148,7 +149,10 @@ export default {
         return;
       }
       $.post('/user/editUserMes', this.form).then(res => {
-
+        this.form = Object.assign({}, res.data)
+        this.isShowSubmit = false;
+        setSession('userId', res.data.user_id);
+        setSession('avatar', res.data.avatar);
       })
     }
   },
