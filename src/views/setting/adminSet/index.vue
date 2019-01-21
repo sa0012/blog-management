@@ -21,10 +21,16 @@
         <el-input v-model="form.user_name"></el-input>
       </el-form-item>
       <el-form-item label="手机号码">
-        <el-input v-model="form.mobile"></el-input>
+        <el-input v-model="form.mobile" maxlength="11"></el-input>
       </el-form-item>
       <el-form-item label="用户邮箱">
         <el-input v-model="form.email"></el-input>
+      </el-form-item>
+      <el-form-item label="注册时间">
+        <el-input disabled v-model="form.created_time"></el-input>
+      </el-form-item>
+      <el-form-item label="修改时间">
+        <el-input disabled v-model="form.edit_time"></el-input>
       </el-form-item>
       <el-form-item label="用户地址">
         <el-input v-model="form.address"></el-input>
@@ -32,12 +38,12 @@
       <el-form-item label="自我描述">
         <el-input type="textarea" v-model="form.desc"></el-input>
       </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit">立即创建</el-button>
-        <el-button>取消</el-button>
+      <el-form-item v-if="isShowSubmit">
+        <el-button type="primary" @click="onSubmit">提交</el-button>
+        <el-button @click="closeEdit">取消</el-button>
       </el-form-item>
     </el-form>
-    <el-button class="edit-btn">编辑用户信息</el-button>
+    <el-button class="edit-btn" @click="editUserInfo">编辑用户信息</el-button>
   </div>
 </template>
 <script>
@@ -56,6 +62,7 @@ export default {
         user_id: ""
       },
       form: {
+        _id: "",
         user_id: "",
         user_name: "",
         mobile: "",
@@ -63,8 +70,10 @@ export default {
         desc: "",
         avatar: "",
         created_time: "",
+        edit_time: "",
         address: ""
-      }
+      },
+      isShowSubmit: false
     };
   },
   methods: {
@@ -121,17 +130,33 @@ export default {
       }
       return isJPG && isLt2M;
     },
-    queryUserInfo() {},
-    onSubmit() {}
+    editUserInfo() {
+      this.isShowSubmit = true;
+    },
+    closeEdit() {
+      this.isShowSubmit = false;
+    },
+    queryUserInfo() {
+      $.post("/user/query", this.userConfig).then(res => {
+        this.form = Object.assign({}, res.data);
+      });
+    },
+    onSubmit() {
+      if (!this.form.user_id) {
+        return;
+      } else if (!this.form._id) {
+        return;
+      }
+      $.post('/user/editUserMes', this.form).then(res => {
+
+      })
+    }
   },
   created() {
     this.form.avatar = getSession("avatar");
     this.userConfig.token = getSession("code_token");
     this.userConfig.user_id = getSession("userId");
-    $.post("/user/query", this.userConfig).then(res => {
-      console.log(res, "user");
-      this.form = Object.assign({}, res.data);
-    });
+    this.queryUserInfo();
   }
 };
 </script>
