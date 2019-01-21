@@ -45,26 +45,30 @@ export default {
         "." +
         filetype;
       // 从后端获取上传凭证token
-      const formdata = new FormData();
-      formdata.append("file", req.file);
+      // const formdata = new FormData();
+      // formdata.append("file", req.file);
       // formdata.append("key", keyname);
-      $.post("/upload/getUploadImg", formdata, config).then(res => {
-        // this.imageUrl = "http://" + this.qiniuaddr + "/" + res.data.key;
-        console.log(res, "imgUrl");
-      });
-      // await $.get("/upload/getUploadToken").then(res => {
-      //   console.log(res, "token");
-      //   const formdata = new FormData();
-      //   formdata.append("file", req.file);
-      //   formdata.append("token", res.data);
-      //   formdata.append("key", keyname);
-      //   // 获取到凭证之后再将文件上传到七牛云空间
-      //   console.log(formdata, "formdata");
-      //   window.axios.post(this.domain, formdata, config).then(res => {
-      //     this.imageUrl = "http://" + this.qiniuaddr + "/" + res.data.key;
-      //     console.log(this.imageUrl, 'imgUrl')
-      //   });
+      // $.post("/upload/getUploadImg", formdata, config).then(res => {
+      //   // this.imageUrl = "http://" + this.qiniuaddr + "/" + res.data.key;
+      //   console.log(res, "imgUrl");
       // });
+      await $.get("/upload/getUploadToken").then(res => {
+        console.log(res, "token");
+        const formdata = new FormData();
+        formdata.append("file", req.file);
+        formdata.append("token", res.data);
+        formdata.append("key", keyname);
+        // 获取到凭证之后再将文件上传到七牛云空间
+        console.log(formdata, "formdata");
+        $.post("/upload/getUploadImg", formdata, config).then(res => {
+          // this.imageUrl = "http://" + this.qiniuaddr + "/" + res.data.key;
+          console.log(res, "imgUrl");
+        });
+        // window.axios.post(this.domain, formdata, config).then(res => {
+        //   this.imageUrl = "http://" + this.qiniuaddr + "/" + res.data.key;
+        //   console.log(this.imageUrl, 'imgUrl')
+        // });
+      });
     },
     // 验证文件合法性
     beforeUpload(file) {
