@@ -156,6 +156,8 @@ export default {
     },
     queryUserInfo() {
       $.post("/user/query", this.userConfig).then(res => {
+        res.data.created_time = $.timeFormat(res.data.created_time - 0)
+        res.data.edit_time = $.timeFormat(res.data.edit_time - 0)
         this.form = Object.assign({}, res.data);
       });
     },
@@ -166,6 +168,8 @@ export default {
         return;
       }
       $.post("/user/editUserMes", this.form).then(res => {
+        res.data.created_time = $.timeFormat(res.data.created_time - 0)
+        res.data.edit_time = $.timeFormat(res.data.edit_time - 0)
         this.form = Object.assign({}, res.data);
         this.isShowSubmit = false;
         setSession("userId", res.data.user_id);

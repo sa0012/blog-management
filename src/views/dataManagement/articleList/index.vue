@@ -36,9 +36,9 @@
       </el-table-column>
       <el-table-column type="index" width="50"></el-table-column>
       <el-table-column sortable label="发布时间" prop="create_time" width="180"></el-table-column>
-      <el-table-column label="用户 ID" prop="_id" width="240"></el-table-column>
+      <!-- <el-table-column label="用户 ID" prop="_id" width="240"></el-table-column> -->
       <el-table-column label="作者" prop="author" width="140"></el-table-column>
-      <el-table-column label="标题" prop="title"></el-table-column>
+      <el-table-column label="标题" prop="title" width="200"></el-table-column>
       <el-table-column label="分类" prop="category" width="140"></el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
