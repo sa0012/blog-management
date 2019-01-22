@@ -15,16 +15,16 @@
         <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
       </el-upload>
       <el-form-item label="用户 ID" style="padding-top: 30px;">
-        <el-input v-model="form.user_id"></el-input>
+        <el-input v-model="form.user_id" :disabled="!isShowSubmit"></el-input>
       </el-form-item>
       <el-form-item label="用户昵称">
-        <el-input v-model="form.user_name"></el-input>
+        <el-input v-model="form.user_name" :disabled="!isShowSubmit"></el-input>
       </el-form-item>
       <el-form-item label="手机号码">
-        <el-input v-model="form.mobile" maxlength="11"></el-input>
+        <el-input v-model="form.mobile" maxlength="11" :disabled="!isShowSubmit"></el-input>
       </el-form-item>
       <el-form-item label="用户邮箱">
-        <el-input v-model="form.email"></el-input>
+        <el-input v-model="form.email" :disabled="!isShowSubmit"></el-input>
       </el-form-item>
       <el-form-item label="注册时间">
         <el-input disabled v-model="form.created_time"></el-input>
@@ -33,10 +33,10 @@
         <el-input disabled v-model="form.edit_time"></el-input>
       </el-form-item>
       <el-form-item label="用户地址">
-        <el-input v-model="form.address"></el-input>
+        <el-input v-model="form.address" :disabled="!isShowSubmit"></el-input>
       </el-form-item>
       <el-form-item label="自我描述">
-        <el-input type="textarea" v-model="form.desc"></el-input>
+        <el-input type="textarea" v-model="form.desc" :disabled="!isShowSubmit"></el-input>
       </el-form-item>
       <el-form-item v-if="isShowSubmit">
         <el-button type="primary" @click="onSubmit">提交</el-button>

@@ -87,7 +87,8 @@ export default {
         if (res.code == 200) {
           setSession('code_token', res.data.token)
           setSession('userId', res.data.user_id)
-          setSession('user_name', res.data.user_id)
+          setSession('user_name', res.data.user_name)
+          setSession('avatar', res.data.avatar)
           this.$message.success('登陆成功')
           this.$router.push(`/manage`)
         } else {
