@@ -7,19 +7,19 @@
             <el-form-item label="用户 ID">
               <span class="table-text">{{ props.row._id }}</span>
             </el-form-item>
-            <el-form-item label="用户名">
+            <el-form-item label="昵称">
               <span class="table-text">{{ props.row.user_id }}</span>
             </el-form-item>
-            <el-form-item label="用户手机号码">
+            <el-form-item label="手机号码">
               <span class="table-text">{{ props.row.mobile }}</span>
             </el-form-item>
-            <el-form-item label="用户邮箱">
+            <el-form-item label="邮箱">
               <span class="table-text">{{ props.row.email }}</span>
             </el-form-item>
-            <el-form-item label="用户注册时间">
+            <el-form-item label="注册时间">
               <span class="table-text">{{ props.row.created_time }}</span>
             </el-form-item>
-            <el-form-item label="用户修改时间">
+            <el-form-item label="修改时间">
               <span class="table-text">{{ props.row.edit_time }}</span>
             </el-form-item>
             <el-form-item label="店铺地址">
@@ -75,7 +75,7 @@ export default Controller;
   font-size: 0;
 }
 .demo-table-expand label {
-  width: 120px;
+  min-width: 80px;
   color: #99a9bf;
 }
 .demo-table-expand .el-form-item {
