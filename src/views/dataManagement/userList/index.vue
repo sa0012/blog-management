@@ -22,8 +22,11 @@
             <el-form-item label="修改时间">
               <span class="table-text">{{ props.row.edit_time }}</span>
             </el-form-item>
-            <el-form-item label="店铺地址">
+            <el-form-item label="用户地址">
               <span class="table-text">{{ props.row.address }}</span>
+            </el-form-item>
+            <el-form-item label="用户描述">
+              <span class="table-text">{{ props.row.desc }}</span>
             </el-form-item>
           </el-form>
         </template>
