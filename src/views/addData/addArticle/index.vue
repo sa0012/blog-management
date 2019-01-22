@@ -9,6 +9,7 @@
     <div class="show-template" :style="{ height: `${contentHeight - 100}px` }">
       <mavon-editor
         class="compile-md"
+        ref="editor"
         v-model="article"
         codeStyle="vs2015"
         @imgAdd="imgAdd" 

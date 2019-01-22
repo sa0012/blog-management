@@ -22,7 +22,8 @@ export default {
         category: '',
         article: '',
         tags: []
-      }
+      },
+      uploadImgArr: []
     }
   },
   created() {
@@ -53,28 +54,17 @@ export default {
       // 从后端获取上传凭证token
       $.post("/upload/artiUploadImg", formdata, config).then(res => {
         console.log(res, "imgUrl");
-        $vm.$img2Url(pos, res.data.key);
+        this.$refs.editor.$img2Url(pos, res.data.key);
+        this.uploadImgArr.push(res.data.key)
       });
-      // axios({
-      //   url: 'server url',
-      //   method: 'post',
-      //   data: formdata,
-      //   headers: {
-      //     'Content-Type': 'multipart/form-data'
-      //   },
-      // }).then((url) => {
-      //   // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
-      //   /**
-      //    * $vm 指为mavonEditor实例，可以通过如下两种方式获取
-      //    * 1. 通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
-      //    * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
-      //    */
-      //   $vm.$img2Url(pos, url);
-      // })
     },
-    imgDel(pos, $file) {
+    imgDel(pos) {
       // delete this.img_file[pos];
-      console.log(pos, $file)
+      const imgKey = this.uploadImgArr[pos[1]].split('/')[3]
+      $.post('/upload/deleteArticleImg', { key: imgKey }).then(res => {
+        this.uploadImgArr.splice(pos[1], 1)
+      })
+      console.log(pos)
     },
     getUpdateArticle(value) {
       this.article = value.article;
