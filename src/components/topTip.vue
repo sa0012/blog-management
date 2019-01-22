@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { getSession } from '@/common/mutils';
+import { getSession } from "@/common/mutils";
 import avatarImg from "../assets/images/default.jpg";
 export default {
   data() {
@@ -40,10 +40,11 @@ export default {
   },
   created() {
     this.userName = getSession("userId");
-    console.log(getSession('avatar'), 'skskkskksk')
-    if (getSession('avatar') != 'undefined') {
-      this.avatar = getSession('avatar')
-    }
+    try {
+      if (getSession("avatar")) {
+        this.avatar = getSession("avatar");
+      }
+    } catch (e) {}
   },
   mounted() {}
 };

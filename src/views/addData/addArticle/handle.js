@@ -62,6 +62,7 @@ export default {
       // delete this.img_file[pos];
       const imgKey = this.uploadImgArr[pos[1]].split('/')[3]
       $.post('/upload/deleteArticleImg', { key: imgKey }).then(res => {
+        this.$refs.editor.$refs.toolbar_left.$imgDelByFilename
         this.uploadImgArr.splice(pos[1], 1)
       })
       console.log(pos)

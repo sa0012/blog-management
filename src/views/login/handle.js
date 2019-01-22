@@ -86,7 +86,7 @@ export default {
       $.post('/user/login', this.loginForm).then(res => {
         if (res.code == 200) {
           setSession('code_token', res.data.token)
-          setSession('userId', res.data._id)
+          setSession('userId', res.data.user_id)
           setSession('user_name', res.data.user_id)
           this.$message.success('登陆成功')
           this.$router.push(`/manage`)
@@ -113,7 +113,7 @@ export default {
       $.post('/user', this.registerForm).then(res => {
         if (res.code == 200) {
           setSession('code_token', res.data.token)
-          setSession('userId', res.data._id)
+          setSession('userId', res.data.user_id)
           setSession('user_name', res.data.user_id)
           setSession('avatar', res.data.github_avator)
           this.$message.success('注册成功')
