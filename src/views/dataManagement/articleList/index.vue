@@ -29,7 +29,15 @@
               <span class="table-text">{{ props.row.edit_time }}</span>
             </el-form-item>
             <el-form-item label="文章">
-              <div class="table-text" style="max-width: 300px;">{{ props.row.article }}</div>
+              <el-popover
+                placement="top-start"
+                title="标题"
+                width="200"
+                trigger="hover"
+                :content="props.row.article"
+              >
+                <div class="table-text" style="max-width: 300px;" slot="reference">{{ props.row.article }}</div>
+              </el-popover>
             </el-form-item>
           </el-form>
         </template>
@@ -45,7 +53,11 @@
           <el-button plain size="small" @click="lookArticle(scope.row)">查看</el-button>
           <el-button plain size="small" @click="addArticle(scope.row._id, scope.row.user_id)">添加</el-button>
           <el-button plain size="small" @click="modifyArticle(scope.row._id, scope.row.user_id)">修改</el-button>
-          <el-button type="danger" size="small" @click="deleteArticle(scope.row._id, scope.row.user_id)">删除</el-button>
+          <el-button
+            type="danger"
+            size="small"
+            @click="deleteArticle(scope.row._id, scope.row.user_id)"
+          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -60,9 +72,7 @@
       ></el-pagination>
     </el-col>
 
-    <look-article
-      :showArticle.sync="showArticle"
-      :articleObj="articleObj"></look-article>
+    <look-article :showArticle.sync="showArticle" :articleObj="articleObj"></look-article>
   </div>
 </template>
 
