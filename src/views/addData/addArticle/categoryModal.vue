@@ -68,6 +68,7 @@
 
 <script>
 import $ from "@/utils";
+import { getSession } from "@/common/mutils";
 export default {
   props: {
     showCategory: {
@@ -122,7 +123,11 @@ export default {
         desc: "",
         article: "",
         category: "",
-        tags: []
+        tags: [],
+        user: {
+          user_name: "",
+          user_avatar: ""
+        }
       }
     };
   },
@@ -134,6 +139,8 @@ export default {
           this.config.title = this.articleConfig.title;
           this.config.author = this.articleConfig.author;
           this.config.category = this.articleConfig.category;
+          this.config.desc = this.articleConfig.desc;
+          this.config.user = Object.assign({}, this.articleConfig.user);
           this.config.tags = JSON.parse(
             JSON.stringify(this.articleConfig.tags)
           );
@@ -149,7 +156,12 @@ export default {
       }
     }
   },
-  created() {},
+  created() {
+    try {
+      this.config.user.user_name = getSession("userId");
+      this.config.user.user_avatar = getSession("avatar");
+    } catch (e) {}
+  },
   methods: {
     publish() {
       this.config.article = this.article;
@@ -164,6 +176,15 @@ export default {
       console.log(this.config, this.articleConfig, "config");
       if (!this.config.article) {
         this.$message.warning("你还没有填写文章内容");
+        return;
+      } else if (!this.config.title) {
+        this.$message.warning("你还没有填写文章标题");
+        return;
+      } else if (!this.config.desc) {
+        this.$message.warning("你还没有填写文章描述");
+        return;
+      } else if (!this.config.author) {
+        this.$message.warning("你还没有填写文章作者");
         return;
       } else if (this.config.tags.length <= 0) {
         this.$message.warning("请添加文章标签");
@@ -182,7 +203,9 @@ export default {
             this.config.category = res.data.category;
             this.config.title = res.data.title;
             this.config.author = res.data.category;
+            this.config.desc = res.data.desc;
             this.config.tags = JSON.parse(JSON.stringify(res.data.tags));
+            this.config.user = Object.assign({}, res.data.user);
             this.$message.success("文章修改成功");
             this.$emit("update:showCategory", false);
             this.$emit("updateArticle", res.data.article);
