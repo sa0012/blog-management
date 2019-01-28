@@ -5,7 +5,13 @@
       <el-row>
         <el-col :span="4">文章标题：</el-col>
         <el-col :span="20">
-          <el-input size="small" v-model="config.title"></el-input>
+          <el-input size="small" v-model="config.title" maxlength="30"></el-input>
+        </el-col>
+      </el-row>
+      <el-row style="padding-top: 20px;">
+        <el-col :span="4">文章描述：</el-col>
+        <el-col :span="20">
+          <el-input size="small" v-model="config.desc" maxlength="100"></el-input>
         </el-col>
       </el-row>
       <el-row style="padding: 20px 0;">
@@ -113,6 +119,7 @@ export default {
       config: {
         title: "",
         author: "",
+        desc: "",
         article: "",
         category: "",
         tags: []
