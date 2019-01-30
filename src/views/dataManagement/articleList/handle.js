@@ -9,12 +9,12 @@ export default {
   data() {
     return {
       config: {
-        size: 1,
+        size: 10,
         page: 1,
       },
       tableData: [],
       pagination: {
-        page: 0,
+        page: 1,
         size: 0,
         total: 0
       },
