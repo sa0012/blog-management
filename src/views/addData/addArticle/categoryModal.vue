@@ -237,9 +237,13 @@ export default {
     },
 
     handleInputConfirm() {
+      console.log(111, '触发')
       let inputValue = this.inputValue;
       if (inputValue) {
         this.config.tags.push(inputValue);
+        $.post('/tag/add', {
+          tag_name: inputValue,
+        })
       }
       this.inputVisible = false;
       this.inputValue = "";
