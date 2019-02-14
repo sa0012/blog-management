@@ -15,7 +15,7 @@
         @imgAdd="imgAdd" 
         @imgDel="imgDel"
         :style="{ height: `${contentHeight - 100}px` }"
-        @change="editorChange"
+        @change="handleCertificateNoInput"
       ></mavon-editor>
     </div>
 

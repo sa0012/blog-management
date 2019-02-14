@@ -242,6 +242,34 @@ let utils = {
       }
 
     }
+  },
+  /**
+   * 获取两个数组之间的不同的部分
+   */
+  getdifferentArr(arry1, arry2) {
+    var arry3 = []
+    var tmp = arry1.concat(arry2)
+    var o = {}
+    for (let i = 0; i < tmp.length; i++)(tmp[i] in o) ? o[tmp[i]]++ : o[tmp[i]] = 1
+    for (let x in o)
+      if (o[x] === 1) arry3.push(x)
+    return arry3
+  },
+  /**
+   * 获取两个数组的公共部分
+   */
+  getSameArr(arry1, arry2) {
+    var arry3 = []
+    var j = 0
+    for (var i = 0; i < arry1.length; i++) {
+      for (var k = 0; k < arry2.length; k++) {
+        if (arry1[i] === arry2[k]) {
+          arry3[j] = arry1[i]
+            ++j
+        }
+      }
+    }
+    return arry3
   }
 }
 

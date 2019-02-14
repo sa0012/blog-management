@@ -27,6 +27,7 @@ export default {
     }
   },
   created() {
+    console.log($.getdifferentArr([1, 2, 3], [2, 4, 5]))
     try {
       this.articleId = this.$route.query._id || '';
       this.userId = this.$route.query.user_id || '';
@@ -61,7 +62,9 @@ export default {
     imgDel(pos) {
       // delete this.img_file[pos];
       const imgKey = this.uploadImgArr[pos[1]].split('/')[3]
-      $.post('/upload/deleteArticleImg', { key: imgKey }).then(res => {
+      $.post('/upload/deleteArticleImg', {
+        key: imgKey
+      }).then(res => {
         this.$refs.editor.$refs.toolbar_left.$imgDelByFilename
         this.uploadImgArr.splice(pos[1], 1)
       })
@@ -70,9 +73,20 @@ export default {
     getUpdateArticle(value) {
       this.article = value.article;
     },
-    editorChange(value, render) {
-      this.article = value;
+    // 函数节流
+    throttle(method, context) {
+      method.tId && clearTimeout(method.tId)
+      method.tId = setTimeout(() => {
+        method.call(context)
+      }, 600)
     },
+    handleCertificateNoInput(value, render) {
+      if (value) {
+        this.article = value;
+        this.throttle(this.editorChange)
+      }
+    },
+    editorChange() {},
     submit() {
       if (this.type) {}
       this.showCategory = true;
