@@ -166,7 +166,7 @@ let utils = {
     var minutes = time.getMinutes();
     var seconds = time.getSeconds();
     // return year + '年' + month + '月' + date + '日' + hours + '时' + minutes + '分' + seconds + '秒';
-    return year + '/' + utils.add0(month) + '/' + utils.add0(date) + ' ' + utils.add0(hours) + ':' + utils.add0(minutes) + ':' + utils.add0(seconds);
+    return year + '-' + utils.add0(month) + '-' + utils.add0(date) + ' ' + utils.add0(hours) + ':' + utils.add0(minutes) + ':' + utils.add0(seconds);
   },
   // 提取字符串中的整數數字
   getNum: (text) => {
