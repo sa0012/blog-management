@@ -4,89 +4,67 @@ export default {
   name: 'userList',
   data() {
     return {
-      commentList: {
-        article_id: '',
-        content: '',
-        user: {
-          user_id: '',
-          user_name: 'sa0012',
-          user_avatar: 'https://avatars3.githubusercontent.com/u/24355136?v=4'
-        }
-      },
-      childComment: {
-        comment_id: '5c3ebb28c496d8c51576005a',
-        user: {
-          user_id: '5c3c20482975bdf2f027c822',
-          user_name: 'sa0012',
-          user_avatar: 'https://avatars3.githubusercontent.com/u/24355136?v=4'
-        },
-
-        // 被评论人信息
-        reply_to_user: {
-          user_name: 'sa0012',
-          user_id: '5c3c20482975bdf2f027c822',
-          user_avatar: 'https://avatars3.githubusercontent.com/u/24355136?v=4'
-        },
-        //评论内容
-        content: '',
-      },
-      article: {
-
-      },
-      queryFatherComment: {
-        page: 1,
-        size: 10,
-        article_id: ''
-      },
-      queryReplyComment: {
-        page: 1,
-        size: 10,
-        comment_id: ''
-      },
-      fatherCommentList: [],
-      childCommentList: [],
-      imgUrl: ''
+      date: [{
+        created_at: "2019-10-23 12:00:00"
+      }, {
+        created_at: "2019-10-23 13:00:00"
+      }, {
+        created_at: "2018-10-23 14:00:00"
+      }, {
+        created_at: "2018-10-24 12:00:00"
+      }, {
+        created_at: "2017-10-22 12:00:00"
+      }, {
+        created_at: "2017-10-22 12:00:00"
+      }, {
+        created_at: "2016-10-25 12:00:00"
+      }, {
+        created_at: "2016-10-28 12:00:00"
+      }, {
+        created_at: "2016-10-28 11:00:00"
+      }]
     }
   },
   methods: {
-    queryArticle() {
-      $.post('/article/findOneArticle', {
-        _id: '5c3d8268ca6b105455e60b16',
-        user_id: '5c3c20482975bdf2f027c822'
-      }).then(res => {
-        this.article = Object.assign({}, res.data)
-        this.commentList.article_id = res.data._id
-        this.commentList.user.user_id = res.data.user_id
-        this.queryCommentList(res.data._id)
-      })
-    },
-    queryCommentList(articleId) {
-      this.queryFatherComment.article_id = articleId;
-      $.post('/comment/queryCommentList', this.queryFatherComment).then(res => {
-        console.log(res.data.list, 'lsit')
-        this.fatherCommentList = res.data.list;
-      })
-    },
-    commentTest() {
-      $.post('/comment/saveComment', this.commentList).then(res => {})
-    },
-    getReplyComment() {
-      $.post('/comment/replySave', this.childComment)
-    },
-    queryReplyCommentsList(id) {
-      this.queryReplyComment.comment_id = id;
-      $.post('/comment/queryReleyCommentsList', this.queryReplyComment).then(res => {
-        this.childCommentList = res.data.list;
-      })
-    },
-    uploadTest() {
-      $.get('/upload/imgUpload').then(res => {
-        this.imgUrl = res.data.key
-      })
+    groupBy(arr, prop, callback) {
+
+      var newArr = {},
+        tempArr = [];
+      for (var i = 0, j = arr.length; i < j; i++) {
+
+        var result = callback(arr[i], arr[i + 1], prop);
+        console.log(result, 'result')
+        if (result) {
+
+          tempArr.push(arr[i]);
+
+        } else {
+          tempArr.push(arr[i]);
+          // newArr.push(tempArr.slice(0));
+          newArr[arr[i].created_at.split(' ')[0].split('-')[0]] = tempArr.slice(0);
+          tempArr.length = 0;
+        }
+
+      }
+
+      return newArr;
     }
   },
   mounted() {
-    this.queryArticle()
-    // this.commentTest()
+    var result = this.groupBy(this.date, 'created_at', (a, b, key) => {
+
+      var C1 = a[key].split(' ')[0].split('-')[0];
+      console.log(C1, 'C1')
+      var C2 = null;
+      try {
+        C2 = b[key].split(' ')[0].split('-')[0];
+      } catch (exception) {
+        C2 = null;
+      }
+
+      return C1 == C2;
+    });
+
+    console.log(result)
   }
 }
