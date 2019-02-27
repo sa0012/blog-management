@@ -68,7 +68,6 @@
 
 <script>
 import $ from "@/utils";
-import { getSession } from "@/common/mutils";
 export default {
   props: {
     showCategory: {
@@ -131,6 +130,11 @@ export default {
       }
     };
   },
+  computed: {
+    userMsg() {
+      return this.$store.state.user;
+    },
+  },
   watch: {
     showCategory(newVal, oldVal) {
       if (this.type === "modify" && newVal) {
@@ -158,8 +162,8 @@ export default {
   },
   created() {
     try {
-      this.config.user.user_name = getSession("userId");
-      this.config.user.user_avatar = getSession("avatar");
+      this.config.user.user_name = this.userMsg.user_id;
+      this.config.user.user_avatar = this.userMsg.avatar;
     } catch (e) {}
   },
   methods: {

@@ -1,7 +1,4 @@
 import $ from '@/utils';
-import {
-  getSession
-} from '@/common/mutils';
 import LookArticle from './lookArticle'
 
 export default {

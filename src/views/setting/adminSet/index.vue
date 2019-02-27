@@ -76,6 +76,11 @@ export default {
       isShowSubmit: false
     };
   },
+  computed: {
+    userMsg() {
+      return this.$store.state.user;
+    },
+  },
   methods: {
     // 上传文件到七牛云
     async upqiniu(req) {
@@ -172,15 +177,16 @@ export default {
         res.data.edit_time = $.timeFormat(res.data.edit_time - 0)
         this.form = Object.assign({}, res.data);
         this.isShowSubmit = false;
-        setSession("userId", res.data.user_id);
-        setSession("avatar", res.data.avatar);
+        this.$store.dispatch('USER_MSG', res.data)
+        // setSession("userId", res.data.user_id);
+        // setSession("avatar", res.data.avatar);
       });
     }
   },
   created() {
-    this.form.avatar = getSession("avatar");
-    this.userConfig.token = getSession("code_token");
-    this.userConfig.user_id = getSession("userId");
+    this.form.avatar = this.userMsg.avatar;
+    this.userConfig.token = this.userMsg.token;
+    this.userConfig.user_id = this.userMsg.user_id;
     this.queryUserInfo();
   }
 };

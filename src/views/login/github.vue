@@ -15,9 +15,10 @@ export default {
   mounted() {
     if (this.$route.query.code) {
       $.get(`/oauth/callback?code=${this.$route.query.code}&type=management`).then(res => {
-        setSession("code_token", res.data.token);
-        setSession("userId", res.data.user_id);
-        setSession("avatar", res.data.avatar);
+        // setSession("code_token", res.data.token);
+        // setSession("userId", res.data.user_id);
+        // setSession("avatar", res.data.avatar);
+        this.$store.dispatch('USER_MSG', res.data);
         this.$message.success(res.msg);
         this.$router.replace(`/manage`);
       });

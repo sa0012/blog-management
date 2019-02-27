@@ -1,15 +1,8 @@
 import TopTip from '@/components/topTip'
-import {
-  getSession
-} from '@/common/mutils';
-import avatarImg from '../../assets/images/default.jpg';
-
 export default {
   name: 'Manage',
   data() {
     return {
-      userName: '',
-      avatar: avatarImg
     }
   },
   computed: {
@@ -18,6 +11,9 @@ export default {
     },
     contentHeight() {
       return (document.body.clientHeight || document.documentElement.clientHeight || 0) - 60;
+    },
+    userMsg() {
+      return this.$store.state.user;
     },
   },
   methods: {
@@ -29,13 +25,6 @@ export default {
     }
   },
   created() {
-    this.userName = getSession('userId')
-    try {
-      if (getSession('avatar')) {
-        this.avatar = getSession('avatar')
-      }
-    } catch (e) {}
-
   },
   mounted() {},
   components: {

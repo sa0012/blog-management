@@ -3,8 +3,8 @@
     <el-row style="height: 100%;">
       <el-col :span="4" style="height: 100%; overflow: auto; background-color: #324057;">
         <div class="user-msg">
-          <img :src="avatar" alt="avator" class="user-avator">
-          <div class="user-name">{{ userName }}</div>
+          <img :src="userMsg.avatar" alt="avator" class="user-avator">
+          <div class="user-name">{{ userMsg.user_id }}</div>
         </div>
 
         <el-menu

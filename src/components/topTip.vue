@@ -6,7 +6,7 @@
     </el-breadcrumb>
 
     <el-dropdown @command="handleCommand" menu-align="start">
-      <img :src="avatar" class="user-avator">
+      <img :src="userMsg.avatar" class="user-avator">
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item command="home">首页</el-dropdown-item>
         <el-dropdown-item command="singout" @click.native="quitLogin">退出</el-dropdown-item>
@@ -16,14 +16,16 @@
 </template>
 
 <script>
-import { getSession } from "@/common/mutils";
-import avatarImg from "../assets/images/default.jpg";
 export default {
   data() {
     return {
-      avatar: avatarImg,
       user_name: ""
     };
+  },
+  computed: {
+    userMsg() {
+      return this.$store.state.user;
+    },
   },
   methods: {
     handleCommand(command) {
@@ -34,17 +36,10 @@ export default {
       }
     },
     quitLogin() {
-      console.log(111111);
       this.$router.push(`/`);
     }
   },
   created() {
-    this.userName = getSession("userId");
-    try {
-      if (getSession("avatar")) {
-        this.avatar = getSession("avatar");
-      }
-    } catch (e) {}
   },
   mounted() {}
 };
