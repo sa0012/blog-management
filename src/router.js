@@ -63,7 +63,7 @@ const router = new Router({
           name: 'commentList',
           meta:{
             requiresAuth: true,
-            title: ['数据管理', '评论列表']
+            title: ['数据管理', '反馈列表']
           },
           // 评论列表
           component: () => import('@/views/dataManagement/commentList')

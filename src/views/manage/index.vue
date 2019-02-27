@@ -27,7 +27,7 @@
             </template>
             <el-menu-item index="userList">用户列表</el-menu-item>
             <el-menu-item index="articleList">文章列表</el-menu-item>
-            <el-menu-item index="commentList">评论列表</el-menu-item>
+            <el-menu-item index="commentList">反馈列表</el-menu-item>
             <el-menu-item index="leaveList">留言列表</el-menu-item>
           </el-submenu>
           <el-submenu index="3">
