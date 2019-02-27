@@ -1,8 +1,4 @@
 import $ from '@/utils';
-import {
-  setSession,
-  removeSession
-} from '@/common/mutils';
 import SqTabs from "@/components/tabs/src";
 import SqTabpane from "@/components/tabpane/src";
 
@@ -108,7 +104,7 @@ export default {
         return;
       }
 
-      $.post('/user', this.registerForm).then(res => {
+      $.post('/user/register', this.registerForm).then(res => {
         if (res.code == 200) {
           this.$store.dispatch('USER_MSG', res.data);
           this.$message.success('注册成功')

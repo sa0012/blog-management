@@ -40,6 +40,7 @@ export default {
     }
   },
   created() {
+    console.log(this.userMsg, 'user')
   },
   mounted() {}
 };

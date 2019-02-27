@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {
+  getSession,
   setSession,
 } from '@/common/mutils';
 Vue.use(Vuex)
-const userMsg = {
+let userMsg = {
   avatar: "",
   token: "",
   user_id: "",
@@ -14,7 +15,9 @@ const userMsg = {
 
 try {
   userMsg = JSON.parse(getSession('userMsg')) || userMsg;
-} catch (e) {}
+} catch (e) {
+  console.log(e);
+}
 
 export default new Vuex.Store({
   state: {

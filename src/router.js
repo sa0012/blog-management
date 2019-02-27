@@ -6,8 +6,7 @@ Vue.use(Router)
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [
-    {
+  routes: [{
       path: '/',
       redirect: '/login'
     },
@@ -24,7 +23,7 @@ const router = new Router({
     {
       path: '/manage',
       name: 'Manage',
-      meta:{
+      meta: {
         requiresAuth: true
       },
       component: () => import('@/views/manage'),
@@ -34,14 +33,14 @@ const router = new Router({
           path: '/',
           name: 'Home',
           component: () => import('@/views/home'),
-          meta:{
+          meta: {
             requiresAuth: true
           },
         },
         {
           path: '/userList',
           name: 'userList',
-          meta:{
+          meta: {
             requiresAuth: true,
             title: ['数据管理', '用户列表']
           },
@@ -51,7 +50,7 @@ const router = new Router({
         {
           path: '/articleList',
           name: 'articleList',
-          meta:{
+          meta: {
             requiresAuth: true,
             title: ['数据管理', '文章列表']
           },
@@ -61,7 +60,7 @@ const router = new Router({
         {
           path: '/commentList',
           name: 'commentList',
-          meta:{
+          meta: {
             requiresAuth: true,
             title: ['数据管理', '反馈列表']
           },
@@ -71,7 +70,7 @@ const router = new Router({
         {
           path: '/leaveList',
           name: 'leaveList',
-          meta:{
+          meta: {
             requiresAuth: true,
             title: ['数据管理', '留言列表']
           },
@@ -83,7 +82,7 @@ const router = new Router({
         {
           path: '/addArticle',
           name: 'addArticle',
-          meta:{
+          meta: {
             requiresAuth: true,
             title: ['添加数据', '添加文章']
           },
@@ -95,7 +94,7 @@ const router = new Router({
         {
           path: '/visitor',
           name: 'visitor',
-          meta:{
+          meta: {
             requiresAuth: true,
             title: ['图表', '用户分布']
           },
@@ -105,7 +104,7 @@ const router = new Router({
         {
           path: '/articleClass',
           name: 'articleClass',
-          meta:{
+          meta: {
             requiresAuth: true,
             title: ['图表', '文章分类']
           },
@@ -117,7 +116,7 @@ const router = new Router({
         {
           path: '/vueEdit',
           name: 'vueEdit',
-          meta:{
+          meta: {
             requiresAuth: true,
             title: ['编辑', '文本编辑']
           },
@@ -129,7 +128,7 @@ const router = new Router({
         {
           path: '/adminSet',
           name: 'adminSet',
-          meta:{
+          meta: {
             requiresAuth: true,
             title: ['设置', '个人中心']
           },
@@ -153,18 +152,25 @@ const router = new Router({
 // 注册全局钩子用来拦截导航
 router.beforeEach((to, from, next) => {
   //获取store里面的token
-  let token = window.sessionStorage.getItem('code_token')
+  let token = '';
+  try {
+    token = JSON.parse(window.sessionStorage.getItem('userMsg')).token
+  } catch (e) {
+    console.log(e);
+  }
   //判断要去的路由有没有requiresAuth
-  if(to.meta.requiresAuth){
-      if(token){
-        next();
-      }else{
-        next({
-          path: '/',
-          query: { redirect: to.fullPath }  // 将刚刚要去的路由path（却无权限）作为参数，方便登录成功后直接跳转到该路由
-        });
-      } 
-  }else{
+  if (to.meta.requiresAuth) {
+    if (token) {
+      next();
+    } else {
+      next({
+        path: '/',
+        query: {
+          redirect: to.fullPath
+        } // 将刚刚要去的路由path（却无权限）作为参数，方便登录成功后直接跳转到该路由
+      });
+    }
+  } else {
     next();
   }
 });
