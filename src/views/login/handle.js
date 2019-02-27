@@ -85,12 +85,7 @@ export default {
       }
       $.post('/user/login', this.loginForm).then(res => {
         if (res.code == 200) {
-          // setSession('code_token', res.data.token)
-          // setSession('userId', res.data.user_id)
-          // setSession('user_name', res.data.user_name)
-          // setSession('avatar', res.data.avatar)
           this.$store.dispatch('USER_MSG', res.data);
-          console.log('进来了吗')
           this.$message.success('登陆成功')
           this.$router.push(`/manage`)
         } else {
@@ -115,10 +110,6 @@ export default {
 
       $.post('/user', this.registerForm).then(res => {
         if (res.code == 200) {
-          // setSession('code_token', res.data.token)
-          // setSession('userId', res.data.user_id)
-          // setSession('user_name', res.data.user_id)
-          // setSession('avatar', res.data.github_avator)
           this.$store.dispatch('USER_MSG', res.data);
           this.$message.success('注册成功')
           this.$router.push(`/manage`)
