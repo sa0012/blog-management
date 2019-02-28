@@ -125,7 +125,8 @@ export default {
         tags: [],
         user: {
           user_name: "",
-          user_avatar: ""
+          user_avatar: "",
+          address: null
         }
       }
     };
@@ -156,7 +157,9 @@ export default {
               this.value = item.value;
             }
           });
-        } catch (e) {}
+        } catch (e) {
+          console.log(e);
+        }
       }
     }
   },
@@ -164,7 +167,10 @@ export default {
     try {
       this.config.user.user_name = this.userMsg.user_id;
       this.config.user.user_avatar = this.userMsg.avatar;
-    } catch (e) {}
+      this.config.user.address = Object.assign({}, this.userMsg.address);
+    } catch (e) {
+      console.log(e);
+    }
   },
   methods: {
     publish() {
@@ -175,7 +181,9 @@ export default {
         );
         this.config.category = this.options[this.value];
         this.config.category = category[0].label;
-      } catch (e) {}
+      } catch (e) {
+        console.log(e);
+      }
 
       console.log(this.config, this.articleConfig, "config");
       if (!this.config.article) {

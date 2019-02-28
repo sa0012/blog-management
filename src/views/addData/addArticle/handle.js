@@ -21,7 +21,7 @@ export default {
         author: '',
         category: '',
         article: '',
-        tags: []
+        tags: [],
       },
       uploadImgArr: []
     }
