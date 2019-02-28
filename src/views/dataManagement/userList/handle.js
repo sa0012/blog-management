@@ -9,7 +9,7 @@ export default {
       currentPage1: 5,
       config: {
         page: 1,
-        size: 1
+        size: 10
       },
       pagination: {
         page: 0,

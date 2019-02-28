@@ -23,7 +23,7 @@
               <span class="table-text">{{ props.row.edit_time }}</span>
             </el-form-item>
             <el-form-item label="用户地址">
-              <span class="table-text">{{ props.row.address }}</span>
+              <span class="table-text">{{ props.row.address.address }}</span>
             </el-form-item>
             <el-form-item label="用户描述">
               <span class="table-text">{{ props.row.desc }}</span>
@@ -53,7 +53,7 @@
         </template>
       </el-table-column>
       <el-table-column label="用户名" prop="user_id" width="140"></el-table-column>
-      <el-table-column label="用户地址" prop="address"></el-table-column>
+      <el-table-column label="用户地址" prop="address.address"></el-table-column>
     </el-table>
     <el-col :span="24" style="padding-top: 15px;">
       <el-pagination
