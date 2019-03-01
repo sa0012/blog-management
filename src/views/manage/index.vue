@@ -11,6 +11,7 @@
           :default-active="defaultActive"
           theme="dark"
           class="el-menu-vertical-demo"
+          style="width: 100%; box-sizing: content-box;"
           @open="handleOpen"
           @close="handleClose"
           background-color="#324057"
@@ -18,10 +19,10 @@
           active-text-color="#ffd04b"
           router
         >
-          <el-menu-item index="manage">
+          <el-menu-item index="manage" class="nav-item">
             <i class="el-icon-menu"></i>首页
           </el-menu-item>
-          <el-submenu index="2">
+          <el-submenu index="2" class="nav-item">
             <template slot="title">
               <i class="el-icon-document"></i>数据管理
             </template>
@@ -30,32 +31,32 @@
             <el-menu-item index="commentList">反馈列表</el-menu-item>
             <el-menu-item index="leaveList">留言列表</el-menu-item>
           </el-submenu>
-          <el-submenu index="3">
+          <el-submenu index="3" class="nav-item">
             <template slot="title">
               <i class="el-icon-plus"></i>添加数据
             </template>
             <el-menu-item index="addArticle">添加文章</el-menu-item>
           </el-submenu>
-          <el-submenu index="4">
+          <el-submenu index="4" class="nav-item">
             <template slot="title">
               <i class="el-icon-star-on"></i>图表
             </template>
             <el-menu-item index="visitor">用户分布</el-menu-item>
             <el-menu-item index="articleClass">文章分类</el-menu-item>
           </el-submenu>
-          <el-submenu index="5">
+          <el-submenu index="5" class="nav-item">
             <template slot="title">
               <i class="el-icon-edit"></i>编辑
             </template>
             <el-menu-item index="vueEdit">文本编辑</el-menu-item>
           </el-submenu>
-          <el-submenu index="6">
+          <el-submenu index="6" class="nav-item">
             <template slot="title">
               <i class="el-icon-setting"></i>设置
             </template>
             <el-menu-item index="adminSet">个人中心</el-menu-item>
           </el-submenu>
-          <el-submenu index="7">
+          <el-submenu index="7" class="nav-item">
             <template slot="title">
               <i class="el-icon-warning"></i>说明
             </template>
@@ -66,7 +67,7 @@
       <el-col :span="20" style="height: 100%; overflow: hidden;">
         <top-tip></top-tip>
         <!-- <keep-alive> -->
-          <router-view  :style="{ height: `${contentHeight}px` }"></router-view>
+        <router-view :style="{ height: `${contentHeight}px` }"></router-view>
         <!-- </keep-alive> -->
       </el-col>
     </el-row>
