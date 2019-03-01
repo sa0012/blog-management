@@ -1,3 +1,4 @@
+import ArticleChart from '@/components/articleChart';
 export default {
   name: 'userList',
   data() {
@@ -5,4 +6,8 @@ export default {
 
     }
   },
+  methods: {},
+  components: {
+    ArticleChart
+  }
 }

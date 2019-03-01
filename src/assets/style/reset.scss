@@ -159,3 +159,14 @@ input:-webkit-autofill {
   padding: 15px;
   box-sizing: border-box;
 }
+
+// 设置100%高度
+.is-height {
+  height: 100%;
+  overflow: hidden;
+}
+
+.is-auto {
+  height: 100%;
+  overflow: auto;
+}

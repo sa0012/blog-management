@@ -1,6 +1,6 @@
 <template>
   <!-- upload -->
-  <div class="upload">
+  <div class="upload is-auto">
     <el-form ref="form" :model="form" label-width="100px">
       <el-upload
         class="avatar-uploader"

@@ -1,5 +1,5 @@
 <template>
-  <div class="padding">
+  <div class="padding is-height">
     <el-table :data="tableData" class="user-list" v-if="tableData && tableData.length">
       <el-table-column type="expand">
         <template slot-scope="props">

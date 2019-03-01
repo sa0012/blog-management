@@ -1,5 +1,5 @@
 <template>
-  <div class="user-list padding">
+  <div class="user-list padding is-height">
     <el-table :data="tableData" border style="width: 100%" v-if="tableData.length > 0">
       <el-table-column type="index" label="#" width="180"></el-table-column>
       <el-table-column sortable prop="create_time" label="反馈日期" width="180"></el-table-column>

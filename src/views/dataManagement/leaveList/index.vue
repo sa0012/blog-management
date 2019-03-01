@@ -1,5 +1,5 @@
 <template>
-  <div class="user-list">
+  <div class="user-list is-height">
     this is a 留言列表
   </div>
 </template>

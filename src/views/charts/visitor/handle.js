@@ -1,3 +1,4 @@
+import visitorPie from '@/components/visitorPie'
 export default {
   name: 'userList',
   data() {
@@ -5,4 +6,8 @@ export default {
 
     }
   },
+  methods: {},
+  components: {
+    visitorPie
+  }
 }
