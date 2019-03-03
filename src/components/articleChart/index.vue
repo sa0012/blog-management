@@ -12,7 +12,6 @@ export default {
   },
   methods: {
     initData() {
-      const colors = ["#5793f3"];
       const option = {
         tooltip: {
           trigger: "axis",
@@ -59,12 +58,12 @@ export default {
         yAxis: [
           {
             type: "value",
-            name: "用户",
+            name: "数量",
             min: 0,
-            max: 250,
-            interval: 50,
+            max: 50,
+            interval: 10,
             axisLabel: {
-              formatter: "{value} 人"
+              formatter: "{value} 篇"
             }
           },
           {
