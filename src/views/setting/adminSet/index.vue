@@ -33,7 +33,7 @@
         <el-input disabled v-model="form.edit_time"></el-input>
       </el-form-item>
       <el-form-item label="用户地址">
-        <el-input v-model="form.address" :disabled="!isShowSubmit"></el-input>
+        <el-input v-model="form.address.address" :disabled="!isShowSubmit"></el-input>
       </el-form-item>
       <el-form-item label="自我描述">
         <el-input type="textarea" v-model="form.desc" :disabled="!isShowSubmit"></el-input>
@@ -48,7 +48,7 @@
 </template>
 <script>
 import $ from "@/utils";
-import { setSession, getSession } from "@/common/mutils";
+import { setSession } from "@/common/mutils";
 export default {
   data() {
     return {
@@ -79,7 +79,7 @@ export default {
   computed: {
     userMsg() {
       return this.$store.state.user;
-    },
+    }
   },
   methods: {
     // 上传文件到七牛云
@@ -161,8 +161,8 @@ export default {
     },
     queryUserInfo() {
       $.post("/user/query", this.userConfig).then(res => {
-        res.data.created_time = $.timeFormat(res.data.created_time - 0)
-        res.data.edit_time = $.timeFormat(res.data.edit_time - 0)
+        res.data.created_time = $.timeFormat(res.data.created_time - 0);
+        res.data.edit_time = $.timeFormat(res.data.edit_time - 0);
         this.form = Object.assign({}, res.data);
       });
     },
@@ -173,20 +173,24 @@ export default {
         return;
       }
       $.post("/user/editUserMes", this.form).then(res => {
-        res.data.created_time = $.timeFormat(res.data.created_time - 0)
-        res.data.edit_time = $.timeFormat(res.data.edit_time - 0)
+        res.data.created_time = $.timeFormat(res.data.created_time - 0);
+        res.data.edit_time = $.timeFormat(res.data.edit_time - 0);
         this.form = Object.assign({}, res.data);
         this.isShowSubmit = false;
-        this.$store.dispatch('USER_MSG', res.data)
+        this.$store.dispatch("USER_MSG", res.data);
         // setSession("userId", res.data.user_id);
         // setSession("avatar", res.data.avatar);
       });
     }
   },
   created() {
-    this.form.avatar = this.userMsg.avatar;
-    this.userConfig.token = this.userMsg.token;
-    this.userConfig.user_id = this.userMsg.user_id;
+    try {
+      this.form.avatar = this.userMsg.avatar;
+      this.userConfig.token = this.userMsg.token;
+      this.userConfig.user_id = this.userMsg.user_id;
+    } catch (e) {
+      console.log(e);
+    }
     this.queryUserInfo();
   }
 };
