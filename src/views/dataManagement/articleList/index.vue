@@ -51,12 +51,13 @@
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
           <el-button plain size="small" @click="lookArticle(scope.row)">查看</el-button>
-          <el-button plain size="small" @click="addArticle(scope.row._id, scope.row.user_id)">添加</el-button>
-          <el-button plain size="small" @click="modifyArticle(scope.row._id, scope.row.user_id)">修改</el-button>
+          <el-button plain size="small" @click="addArticle(scope.row._id, scope.row.user_id)" v-if="userMsg.role === 'ADMIN'">添加</el-button>
+          <el-button plain size="small" @click="modifyArticle(scope.row._id, scope.row.user_id)" v-if="userMsg.role === 'ADMIN'">修改</el-button>
           <el-button
             type="danger"
             size="small"
             @click="deleteArticle(scope.row._id, scope.row.user_id)"
+            v-if="userMsg.role === 'ADMIN'"
           >删除</el-button>
         </template>
       </el-table-column>

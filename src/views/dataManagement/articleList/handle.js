@@ -21,6 +21,11 @@ export default {
       articleObj: {}
     }
   },
+  computed: {
+    userMsg() {
+      return this.$store.state.user;
+    },
+  },
   methods: {
     getArticleList() {
       $.post('/article/getArticle', this.config).then(res => {

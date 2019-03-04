@@ -39,11 +39,18 @@ export default {
     contentHeight() {
       return (document.body.clientHeight || document.documentElement.clientHeight || 0) - 60;
     },
+    userMsg() {
+      return this.$store.state.user;
+    },
   },
   methods: {
     // 绑定@imgAdd event
     imgAdd(pos, $file) {
       // 第一步.将图片上传到服务器.
+      if (this.userMsg.role !== 'ADMIN') {
+        this.$message.error('您不是超级管理员，没有权限上传图片');
+        return;
+      };
       const config = {
         headers: {
           "Content-Type": "multipart/form-data"
@@ -61,6 +68,10 @@ export default {
     },
     imgDel(pos) {
       // delete this.img_file[pos];
+      if (this.userMsg.role !== 'ADMIN') {
+        this.$message.error('您不是超级管理员，没有权限删除图片');
+        return;
+      };
       const imgKey = this.uploadImgArr[pos[1]].split('/')[3]
       $.post('/upload/deleteArticleImg', {
         key: imgKey
@@ -88,7 +99,10 @@ export default {
     },
     editorChange() {},
     submit() {
-      if (this.type) {}
+      if (this.userMsg.role !== 'ADMIN') {
+        this.$message.error('您不是超级管理员，没有权限发布文章');
+        return;
+      };
       this.showCategory = true;
     },
     lookArticle(_id, user_id) {

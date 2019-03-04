@@ -134,7 +134,7 @@ export default {
   computed: {
     userMsg() {
       return this.$store.state.user;
-    },
+    }
   },
   watch: {
     showCategory(newVal, oldVal) {
@@ -174,6 +174,10 @@ export default {
   },
   methods: {
     publish() {
+      if (this.userMsg.role !== "ADMIN") {
+        this.$message.error("您不是超级管理员，没有权限发布文章");
+        return;
+      }
       this.config.article = this.article;
       try {
         let category = this.options.filter(
