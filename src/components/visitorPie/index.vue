@@ -9,22 +9,28 @@ import echarts from "echarts";
 
 export default {
   props: {
-    userDist: {
-      type: Object,
-      dafault: {
-        bjUser: 0,
-        shUser: 0,
-        gzUser: 0,
-        szUser: 0,
-        otherUser: 0
-      }
+    groupData: {
+      type: Array,
+      dafault: []
+    },
+    seriesData: {
+      type: Array,
+      dafault: []
+    },
+    seriesName: {
+      type: String,
+      default: ""
+    },
+    title: {
+      type: String,
+      default: ""
     }
   },
   watch: {
-    userDist: {
+    seriesData: {
       handler(newVal, oldVal) {
         this.initData();
-      },
+      }
     }
   },
   mounted() {
@@ -35,7 +41,7 @@ export default {
     initData() {
       const option = {
         title: {
-          text: "用户分布",
+          text: this.title,
           subtext: "",
           x: "center"
         },
@@ -46,21 +52,15 @@ export default {
         legend: {
           orient: "vertical",
           left: "left",
-          data: ["北京", "上海", "深圳", "杭州", "其他"]
+          data: this.groupData
         },
         series: [
           {
-            name: "访问来源",
+            name: this.seriesName,
             type: "pie",
             radius: "55%",
             center: ["50%", "60%"],
-            data: [
-              { value: this.userDist.bjUser, name: "北京" },
-              { value: this.userDist.shUser, name: "上海" },
-              { value: this.userDist.szUser, name: "深圳" },
-              { value: this.userDist.gzUser, name: "杭州" },
-              { value: this.userDist.otherUser, name: "其他" }
-            ],
+            data: this.seriesData,
             itemStyle: {
               emphasis: {
                 shadowBlur: 10,

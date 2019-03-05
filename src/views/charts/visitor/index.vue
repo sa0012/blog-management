@@ -1,6 +1,11 @@
 <template>
   <div class="user-list is-auto">
-    <visitor-pie class="charts" :userDist.sync="userDist"></visitor-pie>
+    <visitor-pie 
+      class="charts" 
+      :seriesName="seriesName"
+      :title="title"
+      :groupData="groupData"
+      :seriesData="seriesData"></visitor-pie>
   </div>
 </template>
 

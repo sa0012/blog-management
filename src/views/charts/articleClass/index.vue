@@ -2,6 +2,13 @@
   <div class="user-list is-auto">
     <h2 class="section-title">文章统计</h2>
     <article-chart></article-chart>
+    <visitor-pie
+      class="charts"
+      :seriesName="seriesName"
+      :title="title"
+      :groupData="groupData"
+      :seriesData="seriesData"
+    ></visitor-pie>
   </div>
 </template>
 

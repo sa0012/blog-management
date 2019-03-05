@@ -12,7 +12,6 @@ export default {
   },
   methods: {
     initData() {
-      const colors = ["#5793f3", "#675bba", "#d14a61"];
       const option = {
         tooltip: {
           trigger: "axis",
