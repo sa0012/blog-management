@@ -25,7 +25,6 @@ export default {
       handler(newVal, oldVal) {
         this.initData();
       },
-      immediate: true
     }
   },
   mounted() {
