@@ -61,7 +61,8 @@ export default {
     deleteArticle(_id, user_id) {
       $.post('/article/removeArticle', {
         _id,
-        user_id
+        user_id,
+        user: this.userMsg
       }).then(res => {
         console.log(res, 'delete')
         this.config.page = 1;
