@@ -8,6 +8,26 @@
 import echarts from "echarts";
 
 export default {
+  props: {
+    userDist: {
+      type: Object,
+      dafault: {
+        bjUser: 0,
+        shUser: 0,
+        gzUser: 0,
+        szUser: 0,
+        otherUser: 0
+      }
+    }
+  },
+  watch: {
+    userDist: {
+      handler(newVal, oldVal) {
+        this.initData();
+      },
+      immediate: true
+    }
+  },
   mounted() {
     this.myChart = echarts.init(document.getElementById("visitorpie"));
     this.initData();
@@ -36,11 +56,11 @@ export default {
             radius: "55%",
             center: ["50%", "60%"],
             data: [
-              { value: 10, name: "北京" },
-              { value: 30, name: "上海" },
-              { value: 20, name: "深圳" },
-              { value: 50, name: "杭州" },
-              { value: 20, name: "其他" }
+              { value: this.userDist.bjUser, name: "北京" },
+              { value: this.userDist.shUser, name: "上海" },
+              { value: this.userDist.szUser, name: "深圳" },
+              { value: this.userDist.gzUser, name: "杭州" },
+              { value: this.userDist.otherUser, name: "其他" }
             ],
             itemStyle: {
               emphasis: {
@@ -55,12 +75,7 @@ export default {
 
       this.myChart.setOption(option);
     }
-  },
-  // watch: {
-  //   pieData() {
-  //     this.initData();
-  //   }
-  // }
+  }
 };
 </script>
 

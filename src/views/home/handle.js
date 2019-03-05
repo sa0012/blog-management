@@ -4,18 +4,28 @@ import $ from '@/utils'
 export default {
   data() {
     return {
-
+      countMes: {},
+      todayMsg: {}
     }
   },
   methods: {
-    testAuth() {
-      $.post('/leave', { content: '这是留言' }).then(res => {
-        alert('留言')
-        console.log(res, 'article')
+    queryCount() {
+      $.get('/count/statistical').then(res => {
+        this.countMes = Object.assign({}, res.data);
+      })
+    },
+    queryTodayCount() {
+      $.get('/count/todayCount').then(res => {
+        this.todayMsg = Object.assign({}, res.data);
       })
     }
   },
-  mounted() {},
+  mounted() {
+    Promise.all([
+      this.queryTodayCount(),
+      this.queryCount(),
+    ])
+  },
   components: {
     TopTip,
     UserCharts

@@ -10,22 +10,22 @@
         </el-col>
         <el-col :span="4">
           <div class="data_list">
-            <span class="data_num">{{'23'}}</span> 新增用户
+            <span class="data_num">{{ todayMsg.user_count }}</span> 新增用户
           </div>
         </el-col>
         <el-col :span="4">
           <div class="data_list">
-            <span class="data_num">{{'34'}}</span> 新增文章
+            <span class="data_num">{{ todayMsg.article_count }}</span> 新增文章
           </div>
         </el-col>
         <el-col :span="4">
           <div class="data_list">
-            <span class="data_num">{{'67'}}</span> 今日留言
+            <span class="data_num">{{ todayMsg.leave_count }}</span> 今日留言
           </div>
         </el-col>
         <el-col :span="4">
           <div class="data_list">
-            <span class="data_num">{{'67'}}</span> 今日反馈
+            <span class="data_num">{{ todayMsg.feedback_count }}</span> 今日反馈
           </div>
         </el-col>
       </el-row>
@@ -37,22 +37,22 @@
         </el-col>
         <el-col :span="4">
           <div class="data_list">
-            <span class="data_num">{{ '23' }}</span> 历史用户
+            <span class="data_num">{{ countMes.user_count }}</span> 历史用户
           </div>
         </el-col>
         <el-col :span="4">
           <div class="data_list">
-            <span class="data_num">{{ '34' }}</span> 历史文章
+            <span class="data_num">{{ countMes.article_count }}</span> 历史文章
           </div>
         </el-col>
         <el-col :span="4">
           <div class="data_list">
-            <span class="data_num">{{ '45' }}</span> 历史留言
+            <span class="data_num">{{ countMes.leave_count }}</span> 历史留言
           </div>
         </el-col>
         <el-col :span="4">
           <div class="data_list">
-            <span class="data_num">{{ '53' }}</span> 历史反馈
+            <span class="data_num">{{ countMes.feedback_count }}</span> 历史反馈
           </div>
         </el-col>
       </el-row>
