@@ -47,9 +47,13 @@ export default {
       }
 
       return newArr;
+    },
+    queryMonthDate() {
+      $.get('/count/montylyCount')
     }
   },
   mounted() {
+    this.queryMonthDate()
     var result = this.groupBy(this.date, 'created_at', (a, b, key) => {
 
       var C1 = a[key].split(' ')[0].split('-')[0];

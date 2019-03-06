@@ -41,10 +41,14 @@ export default {
           })
         })
       })
+    },
+    queryMonthDate() {
+      $.get('/count/montylyCount')
     }
   },
   mounted() {
     Promise.all([
+      this.queryMonthDate(),
       this.queryAllTags(),
       this.queryAllCategory(),
     ])
