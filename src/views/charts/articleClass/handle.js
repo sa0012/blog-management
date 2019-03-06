@@ -1,5 +1,6 @@
 import ArticleChart from '@/components/articleChart';
 import visitorPie from '@/components/visitorPie';
+import RingChart from '@/components/ringChart';
 import $ from '@/utils';
 export default {
   name: 'userList',
@@ -8,7 +9,11 @@ export default {
       seriesName: "标签类型",
       title: "文章标签分布",
       groupData: [],
-      seriesData: []
+      seriesData: [],
+      ringSeriesName: '分类类型',
+      ringTitle: '文章分类分布',
+      ringGroupData: [],
+      ringSeriesData: [],
     }
   },
   methods: {
@@ -24,13 +29,29 @@ export default {
         })
 
       })
+    },
+    queryAllCategory() {
+      $.get('/count/categoryCount').then(res => {
+        let categoryArr = res.data;
+        categoryArr.forEach((cate, index) => {
+          this.ringGroupData.push(cate.category_name);
+          this.ringSeriesData.push({
+            value: cate.category_count,
+            name: cate.category_name,
+          })
+        })
+      })
     }
   },
   mounted() {
-    this.queryAllTags();
+    Promise.all([
+      this.queryAllTags(),
+      this.queryAllCategory(),
+    ])
   },
   components: {
     ArticleChart,
-    visitorPie
+    visitorPie,
+    RingChart
   }
 }

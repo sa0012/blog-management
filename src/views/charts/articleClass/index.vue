@@ -9,6 +9,13 @@
       :groupData="groupData"
       :seriesData="seriesData"
     ></visitor-pie>
+    <ring-chart
+      :ringSeriesName="ringSeriesName"
+      :ringTitle="ringTitle"
+      :ringGroupData="ringGroupData"
+      :ringSeriesData="ringSeriesData"
+    ></ring-chart>
+
   </div>
 </template>
 
