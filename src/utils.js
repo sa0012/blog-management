@@ -86,7 +86,6 @@ let utils = {
     headers = headers && headers.headers ? headers.headers : {
       "Content-Type": "application/json; charset=utf-8"
     }
-    console.log(headers, 'headers')
     window.axios[method](url, req, headers).then(res => {
       if (res.data.code != 200) {
         new Vue().$message.error(res.data.msg)

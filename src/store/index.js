@@ -33,7 +33,6 @@ export default new Vuex.Store({
     USER_MSG: ({
       commit
     }, data) => {
-      console.log(data, 'data')
       setSession('userMsg', data);
       commit('user_msg', data);
     },

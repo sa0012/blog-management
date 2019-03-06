@@ -27,7 +27,6 @@ export default {
     }
   },
   created() {
-    console.log($.getdifferentArr([1, 2, 3], [2, 4, 5]))
     try {
       this.articleId = this.$route.query._id || '';
       this.userId = this.$route.query.user_id || '';
@@ -58,10 +57,8 @@ export default {
       };
       const formdata = new FormData();
       formdata.append("file", $file);
-      console.log($file, 'formdata')
       // 从后端获取上传凭证token
       $.post("/upload/artiUploadImg", formdata, config).then(res => {
-        console.log(res, "imgUrl");
         this.$refs.editor.$img2Url(pos, res.data.key);
         this.uploadImgArr.push(res.data.key)
       });
@@ -79,7 +76,6 @@ export default {
         this.$refs.editor.$refs.toolbar_left.$imgDelByFilename
         this.uploadImgArr.splice(pos[1], 1)
       })
-      console.log(pos)
     },
     getUpdateArticle(value) {
       this.article = value.article;

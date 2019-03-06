@@ -84,7 +84,6 @@ export default {
   methods: {
     // 上传文件到七牛云
     async upqiniu(req) {
-      console.log(req);
       const config = {
         headers: { "Content-Type": "multipart/form-data" }
       };
@@ -108,7 +107,6 @@ export default {
       $.post("/upload/getUploadImg", formdata, config).then(res => {
         this.form.avatar = res.data.key;
         setSession("avatar", res.data.key);
-        console.log(res, "imgUrl");
       });
       // await $.get("/upload/getUploadToken").then(res => {
       //   console.log(res, "token");
@@ -124,21 +122,14 @@ export default {
       //   });
       // });
       await $.get("/upload/getUploadToken").then(res => {
-        console.log(res, "token");
         const formdata = new FormData();
         formdata.append("file", req.file);
         formdata.append("token", res.data);
         formdata.append("key", keyname);
         // 获取到凭证之后再将文件上传到七牛云空间
-        console.log(formdata, "formdata");
         $.post("/upload/getUploadImg", formdata, config).then(res => {
           // this.imageUrl = "http://" + this.qiniuaddr + "/" + res.data.key;
-          console.log(res, "imgUrl");
         });
-        // window.axios.post(this.domain, formdata, config).then(res => {
-        //   this.imageUrl = "http://" + this.qiniuaddr + "/" + res.data.key;
-        //   console.log(this.imageUrl, 'imgUrl')
-        // });
       });
     },
     // 验证文件合法性

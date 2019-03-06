@@ -22,7 +22,6 @@ instance.interceptors.request.use(
     } catch (e) {
       console.log(e);
     }
-    console.log(token, 'token')
     if (token) {
       config.headers.Authorization = token;
     }

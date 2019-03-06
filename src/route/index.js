@@ -30,10 +30,8 @@ router.beforeEach((to, from, next) => {
   //获取store里面的token
   let token = window.sessionStorage.getItem('code_token')
   //判断要去的路由有没有requiresAuth
-  console.log(to.meta, 'requiresAuth')
   if(to.meta.requiresAuth){
       if(token){
-        console.log(token, 'token')
         next();
       }else{
         next({

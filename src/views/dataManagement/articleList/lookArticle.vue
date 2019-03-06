@@ -37,7 +37,6 @@ export default {
   watch: {
     showArticle(newVal, oldVal) {
       if (newVal) {
-        console.log(this.articleObj, "look");
       }
     }
   },

@@ -33,7 +33,6 @@ export default {
       for (var i = 0, j = arr.length; i < j; i++) {
 
         var result = callback(arr[i], arr[i + 1], prop);
-        console.log(result, 'result')
         if (result) {
 
           tempArr.push(arr[i]);
@@ -54,7 +53,6 @@ export default {
     var result = this.groupBy(this.date, 'created_at', (a, b, key) => {
 
       var C1 = a[key].split(' ')[0].split('-')[0];
-      console.log(C1, 'C1')
       var C2 = null;
       try {
         C2 = b[key].split(' ')[0].split('-')[0];
@@ -65,6 +63,5 @@ export default {
       return C1 == C2;
     });
 
-    console.log(result)
   }
 }

@@ -64,17 +64,12 @@ export default {
         user_id,
         user: this.userMsg
       }).then(res => {
-        console.log(res, 'delete')
         this.config.page = 1;
         this.getArticleList();
       })
     },
     lookArticle(article) {
-      // $.post('/article/findOneArticle', {_id, user_id}).then(res => {
-      //   console.log(res)
-      // })
       this.showArticle = true;
-      console.log(article)
       this.articleObj = Object.assign({}, article)
     },
     handleSizeChange(val) {

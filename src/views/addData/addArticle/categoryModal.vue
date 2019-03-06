@@ -49,10 +49,10 @@
         <el-col :span="20">
           <el-select v-model="value" placeholder="请选择文章分类">
             <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              v-for="(item, index) in options"
+              :key="index"
+              :label="item.category_name"
+              :value="item._id"
             ></el-option>
           </el-select>
         </el-col>
@@ -98,18 +98,6 @@ export default {
   data() {
     return {
       options: [
-        {
-          value: "1",
-          label: "前端"
-        },
-        {
-          value: "2",
-          label: "后端"
-        },
-        {
-          value: "3",
-          label: "其他"
-        }
       ],
       value: "",
       inputVisible: false,
@@ -140,7 +128,6 @@ export default {
     showCategory(newVal, oldVal) {
       if (this.type === "modify" && newVal) {
         try {
-          console.log(this.articleConfig, "configArticle");
           this.config.title = this.articleConfig.title;
           this.config.author = this.articleConfig.author;
           this.config.category = this.articleConfig.category;
@@ -153,8 +140,8 @@ export default {
           this.config.user_id = this.articleConfig.user_id;
 
           this.options.forEach((item, index) => {
-            if (item.label === this.config.category) {
-              this.value = item.value;
+            if (item.category_name === this.config.category) {
+              this.value = item._id;
             }
           });
         } catch (e) {
@@ -173,6 +160,11 @@ export default {
     }
   },
   methods: {
+    queryCategory() {
+      $.get('/category/query').then(res => {
+        this.options = JSON.parse(JSON.stringify(res.data));
+      })
+    },
     publish() {
       if (this.userMsg.role !== "ADMIN") {
         this.$message.error("您不是超级管理员，没有权限发布文章");
@@ -181,10 +173,10 @@ export default {
       this.config.article = this.article;
       try {
         let category = this.options.filter(
-          (item, index) => item.value === this.value
+          (item, index) => item._id === this.value
         );
         this.config.category = this.options[this.value];
-        this.config.category = category[0].label;
+        this.config.category = category[0].category_name;
       } catch (e) {
         console.log(e);
       }
@@ -253,7 +245,6 @@ export default {
     },
 
     handleInputConfirm() {
-      console.log(111, "触发");
       let inputValue = this.inputValue;
       if (inputValue) {
         this.config.tags.push(inputValue);
@@ -266,6 +257,7 @@ export default {
     }
   },
   mounted() {
+    this.queryCategory();
     if (this.config.tags.length > 5) {
       this.inputVisible = false;
     }
