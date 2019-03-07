@@ -1,7 +1,12 @@
 <template>
   <div class="user-list is-auto">
     <h2 class="section-title">文章统计</h2>
-    <article-chart></article-chart>
+    <article-chart
+      :articleSeriesName="articleSeriesName"
+      :articleTitle="articleTitle"
+      :articleGroupData="articleGroupData"
+      :articleSeriesData="articleSeriesData"
+    ></article-chart>
     <visitor-pie
       class="charts"
       :seriesName="seriesName"
@@ -15,7 +20,6 @@
       :ringGroupData="ringGroupData"
       :ringSeriesData="ringSeriesData"
     ></ring-chart>
-
   </div>
 </template>
 

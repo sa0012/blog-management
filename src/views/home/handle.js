@@ -18,12 +18,18 @@ export default {
       $.get('/count/todayCount').then(res => {
         this.todayMsg = Object.assign({}, res.data);
       })
+    },
+    queryAllCount() {
+      $.get('/count/allOfCount').then(res => {
+        console.log(res.data)
+      })
     }
   },
   mounted() {
     Promise.all([
       this.queryTodayCount(),
       this.queryCount(),
+      this.queryAllCount()
     ])
   },
   components: {

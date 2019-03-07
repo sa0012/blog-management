@@ -10,62 +10,63 @@ export default {
   data() {
     return {};
   },
+  props: {
+    articleGroupData: {
+      type: Array,
+      dafault: []
+    },
+    articleSeriesData: {
+      type: Array,
+      dafault: []
+    },
+    articleSeriesName: {
+      type: String,
+      default: ""
+    },
+    articleTitle: {
+      type: String,
+      default: ""
+    }
+  },
+  watch: {
+    articleSeriesData: {
+      handler(newVal, oldVal) {
+        this.initData();
+      }
+    }
+  },
   methods: {
     initData() {
       const option = {
+        title: {
+          text: "文章发布月度统计"
+          // x: "center",
+          // subtext: "纯属虚构"
+        },
         tooltip: {
-          trigger: "axis",
-          axisPointer: {
-            type: "cross",
-            crossStyle: {
-              color: "#999"
-            }
-          }
+          trigger: "axis"
+        },
+        legend: {
+          data: ["文章"]
         },
         toolbox: {
+          show: true,
           feature: {
+            mark: { show: true },
             dataView: { show: true, readOnly: false },
             magicType: { show: true, type: ["line", "bar"] },
             restore: { show: true },
             saveAsImage: { show: true }
           }
         },
-        legend: {
-          data: ["文章"]
-        },
+        calculable: true,
         xAxis: [
           {
             type: "category",
-            data: [
-              "1月",
-              "2月",
-              "3月",
-              "4月",
-              "5月",
-              "6月",
-              "7月",
-              "8月",
-              "9月",
-              "10月",
-              "11月",
-              "12月"
-            ],
-            axisPointer: {
-              type: "shadow"
-            }
+            data: this.articleGroupData
           }
         ],
         yAxis: [
-          {
-            type: "value",
-            name: "数量",
-            min: 0,
-            max: 50,
-            interval: 10,
-            axisLabel: {
-              formatter: "{value} 篇"
-            }
-          },
           {
             type: "value",
             name: "数量",
@@ -80,25 +81,21 @@ export default {
         series: [
           {
             name: "文章",
-            type: "line",
-            yAxisIndex: 1,
-            data: [
-              2.0,
-              2.2,
-              3.3,
-              4.5,
-              6.3,
-              10.2,
-              20.3,
-              23.4,
-              23.0,
-              16.5,
-              12.0,
-              6.2
-            ]
-          },
+            type: "bar",
+            data: this.articleSeriesData,
+            markPoint: {
+              data: [
+                { type: "max", name: "最大值" },
+                { type: "min", name: "最小值" }
+              ]
+            },
+            markLine: {
+              data: [{ type: "average", name: "平均值" }]
+            }
+          }
         ]
       };
+
       this.myChart.setOption(option);
     }
   },

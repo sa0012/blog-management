@@ -22,7 +22,21 @@ export default {
         created_at: "2016-10-28 12:00:00"
       }, {
         created_at: "2016-10-28 11:00:00"
-      }]
+      }],
+      month: [
+        '01',
+        '02',
+        '03',
+        '04',
+        '05',
+        '06',
+        '07',
+        '08',
+        '09',
+        '10',
+        '11',
+        '12',
+      ]
     }
   },
   methods: {
@@ -50,7 +64,16 @@ export default {
     },
     queryMonthDate() {
       $.get('/count/montylyCount')
-    }
+    },
+    getdifferentArr(arry1, arry2) {
+      var arry3 = []
+      var tmp = arry1.concat(arry2)
+      var o = {}
+      for (let i = 0; i < tmp.length; i++)(tmp[i] in o) ? o[tmp[i]]++ : o[tmp[i]] = 1
+      for (let x in o)
+        if (o[x] === 1) arry3.push(x)
+      return arry3
+    },
   },
   mounted() {
     this.queryMonthDate()
@@ -67,5 +90,34 @@ export default {
       return C1 == C2;
     });
 
+    // 日期统计
+    let currentTime = $.timeFormat(new Date() - 0).split(" ")[0];
+    let cYear = currentTime.split('-')[0];
+    let cMonth = currentTime.split('-')[1];
+    let currentYearArr = this.month.slice(0, Number(cMonth));
+    let nextYearArr = this.month.slice(Number(cMonth));
+    let nextResult = [],
+      currentResult = [];
+    nextYearArr.forEach((next, nIndex) => {
+      nextResult.push(`${ cYear - 1 }-${next}`);
+    });
+    currentYearArr.forEach((current, nIndex) => {
+      currentResult.push(`${ cYear }-${current}`);
+    });
+    let result1 = nextResult.concat(currentResult);
+    let result2 = [
+      '2017-01',
+      '2017-04',
+      '2018-01',
+      '2018-03',
+      '2018-06',
+      '2018-10',
+      '2018-12',
+      '2019-01',
+      '2019-04',
+      '2019-08'
+    ];
+
+    console.log(this.getdifferentArr(result1, result2), 'time')
   }
 }

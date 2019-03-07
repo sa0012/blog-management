@@ -14,6 +14,10 @@ export default {
       ringTitle: '文章分类分布',
       ringGroupData: [],
       ringSeriesData: [],
+      articleSeriesName: '分类类型',
+      articleTitle: '文章分类分布',
+      articleGroupData: [],
+      articleSeriesData: [],
     }
   },
   methods: {
@@ -43,7 +47,24 @@ export default {
       })
     },
     queryMonthDate() {
-      $.get('/count/montylyCount')
+      $.get('/count/montylyCount').then(res => {
+        // let keyArr = Object.keys(res.data);
+        // let valuesArr = Object.values(res.data);
+        let article = res.data.article;
+        for (let key in article) {
+          this.articleGroupData.push(key);
+        }
+        this.articleGroupData.sort();
+        this.articleGroupData.forEach((item, index) => {
+          this.articleSeriesData.push({
+            value: article[item],
+            name: article[item],
+          })
+        });
+
+        console.log(this.articleGroupData, this.articleSeriesData)
+
+      })
     }
   },
   mounted() {
