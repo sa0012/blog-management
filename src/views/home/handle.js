@@ -5,7 +5,9 @@ export default {
   data() {
     return {
       countMes: {},
-      todayMsg: {}
+      todayMsg: {},
+      xAxisData: [],
+      countData: {}
     }
   },
   methods: {
@@ -22,6 +24,17 @@ export default {
     queryAllCount() {
       $.get('/count/allOfCount').then(res => {
         console.log(res.data)
+        let result = res.data;
+        this.xAxisData = Object.keys(result.article).sort();
+        for (let key in result) {
+          let yAxisData = [];
+          this.xAxisData.forEach((item, index) => {
+            yAxisData.push(result[key][item])
+          });
+          this.countData[key] = yAxisData;
+        }
+        // this.countData = Object.assign({}, result);
+        console.log(this.countData, 'countData')
       })
     }
   },

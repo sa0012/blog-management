@@ -57,7 +57,9 @@
         </el-col>
       </el-row>
     </section>
-    <user-charts></user-charts>
+    <user-charts
+      :xAxisData="xAxisData"
+      :countData="countData"></user-charts>
   </div>
 </template>
 
