@@ -1,6 +1,6 @@
 <template>
   <div class="article">
-    <div id="article" class style="width: 100%;height:450px;"></div>
+    <div id="article" class style="width: 90%;height:450px;"></div>
   </div>
 </template>
 
