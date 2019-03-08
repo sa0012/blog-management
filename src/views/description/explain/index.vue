@@ -2,41 +2,52 @@
   <section class="padding is-auto">
     <el-row class="content">
       <div class="container">
-        <h2 class="title">博客简介</h2>
-        <img src="../../../assets/images/avatar.jpg" class="avatar" alt>
-        <section class="profile">
-          <h3 class="profile-title">个人资料</h3>
-          <el-row>
-            <el-col :span="2">姓名：</el-col>
-            <el-col :span="22">陈龙</el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="2">职业：</el-col>
-            <el-col :span="22">web前端开发工程师</el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="2">技能：</el-col>
-            <el-col :span="22">javascript, vue, react, webpack, git。。。</el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="2">邮箱：</el-col>
-            <el-col :span="22">
-              <span>1583479514@qq.com</span>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="2">个人博客：</el-col>
-            <el-col :span="22">
-              <a href="http://client.juckchen.cn" target="_blank">client.juckchen.cn</a>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="2">GitHub：</el-col>
-            <el-col :span="22">
-              <a href="https://github.com/sa0012?tab=repositories" target="_blank">https://github.com/sa0012</a>
-            </el-col>
-          </el-row>
-        </section>
+        <!-- <h2 class="title">博客简介</h2> -->
+        <el-row>
+          <el-col :span="8">
+            <div class="avatar-img">
+              <img src="../../../assets/images/avatar.jpg" style="width: 100%;" class="avatar" alt>
+            </div>
+          </el-col>
+          <el-col :span="16">
+            <section class="profile">
+              <h3 class="profile-title">个人资料</h3>
+              <el-row>
+                <el-col :span="2" class="pro-name">姓名：</el-col>
+                <el-col :span="24">陈龙</el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="2" class="pro-name">职业：</el-col>
+                <el-col :span="22">web前端开发工程师</el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="2" class="pro-name">技能：</el-col>
+                <el-col :span="22">javascript, vue, react, webpack, git。。。</el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="2" class="pro-name">邮箱：</el-col>
+                <el-col :span="22">
+                  <span>1583479514@qq.com</span>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="2" class="pro-name">个人博客：</el-col>
+                <el-col :span="22">
+                  <a href="http://client.juckchen.cn" target="_blank">client.juckchen.cn</a>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="2" class="pro-name">GitHub：</el-col>
+                <el-col :span="22">
+                  <a
+                    href="https://github.com/sa0012?tab=repositories"
+                    target="_blank"
+                  >https://github.com/sa0012</a>
+                </el-col>
+              </el-row>
+            </section>
+          </el-col>
+        </el-row>
 
         <section class="intro-wrap">
           <h3 class="profile-title">博客简介</h3>
@@ -87,6 +98,10 @@ export default Controller;
   position: relative;
   margin: 0 auto;
   text-align: center;
+  width: 80%;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 30px;
 
   .title {
     font-size: 18px;
@@ -94,9 +109,15 @@ export default Controller;
     letter-spacing: 3px;
     padding: 15px;
   }
+  
+  .pro-name {
+    min-width: 50px;
+  }
 
-  .avatar {
-    padding: 30px 0;
+  .avatar-img {
+    padding-right: 30px;
+    box-sizing: border-box;
+    min-width: 300px;
   }
 
   .intro-wrap {
@@ -120,6 +141,8 @@ export default Controller;
 
   .profile {
     text-align: left;
+    padding-left: 30px;
+    box-sizing: border-box;
   }
 }
 
