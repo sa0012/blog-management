@@ -1,6 +1,8 @@
 <template>
   <div class="user-list is-height">
-    this is a addArticle
+    <input type="text" id="pl" />
+    <input type="button" value="发送" id="submit" />
+    <input type="button" value="关闭" id="close" />
   </div>
 </template>
 
