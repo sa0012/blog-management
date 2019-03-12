@@ -33,7 +33,7 @@
         <el-input disabled v-model="form.edit_time"></el-input>
       </el-form-item>
       <el-form-item label="用户地址">
-        <el-input v-model="form.address.address" :disabled="!isShowSubmit"></el-input>
+        <el-input v-model="form.address.city" :disabled="!isShowSubmit"></el-input>
       </el-form-item>
       <el-form-item label="自我描述">
         <el-input type="textarea" v-model="form.desc" :disabled="!isShowSubmit"></el-input>
