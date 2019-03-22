@@ -181,7 +181,6 @@ export default {
         console.log(e);
       }
 
-      console.log(this.config, this.articleConfig, "config");
       if (!this.config.article) {
         this.$message.warning("你还没有填写文章内容");
         return;
