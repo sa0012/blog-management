@@ -13,32 +13,32 @@
             <section class="profile">
               <h3 class="profile-title">个人资料</h3>
               <el-row>
-                <el-col :span="2" class="pro-name">姓名：</el-col>
-                <el-col :span="24">陈龙</el-col>
+                <el-col :span="4" class="pro-name">姓名：</el-col>
+                <el-col :span="20">陈龙</el-col>
               </el-row>
               <el-row>
-                <el-col :span="2" class="pro-name">职业：</el-col>
-                <el-col :span="22">web前端开发工程师</el-col>
+                <el-col :span="4" class="pro-name">职业：</el-col>
+                <el-col :span="20">web前端开发工程师</el-col>
               </el-row>
               <el-row>
-                <el-col :span="2" class="pro-name">技能：</el-col>
-                <el-col :span="22">javascript, vue, react, webpack, git。。。</el-col>
+                <el-col :span="4" class="pro-name">技能：</el-col>
+                <el-col :span="20">javascript, vue, react, webpack, git。。。</el-col>
               </el-row>
               <el-row>
-                <el-col :span="2" class="pro-name">邮箱：</el-col>
-                <el-col :span="22">
+                <el-col :span="4" class="pro-name">邮箱：</el-col>
+                <el-col :span="20">
                   <span>1583479514@qq.com</span>
                 </el-col>
               </el-row>
               <el-row>
-                <el-col :span="2" class="pro-name">个人博客：</el-col>
-                <el-col :span="22">
-                  <a href="http://client.juckchen.cn" target="_blank">client.juckchen.cn</a>
+                <el-col :span="4" class="pro-name">个人博客：</el-col>
+                <el-col :span="20">
+                  <a href="https://www.juckchen.cn" target="_blank">client.juckchen.cn</a>
                 </el-col>
               </el-row>
               <el-row>
-                <el-col :span="2" class="pro-name">GitHub：</el-col>
-                <el-col :span="22">
+                <el-col :span="4" class="pro-name">GitHub：</el-col>
+                <el-col :span="20">
                   <a
                     href="https://github.com/sa0012?tab=repositories"
                     target="_blank"
